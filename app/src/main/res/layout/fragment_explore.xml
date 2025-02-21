@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#303030">
+
+    <!-- Title of the Explore Page -->
+    <TextView
+        android:id="@+id/explore_page_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Llandaff Campus"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:gravity="center" />
+
+    <!-- Scrollable Area for Museum List -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/explore_page_title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp">
+
+        <LinearLayout
+            android:id="@+id/museum_list_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Lecture Halls -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp"
+                android:gravity="center">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginBottom="8dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="4dp">
+
+                    <ImageView
+                        android:id="@+id/lecture_halls_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/lecture_halls"
+                        android:contentDescription="Lecture Halls"
+                        android:scaleType="centerCrop" />
+                </androidx.cardview.widget.CardView>
+
+                <Button
+                    android:id="@+id/lecture_halls_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lecture Halls"
+                    android:backgroundTint="@android:color/transparent"
+                    android:textColor="@android:color/white"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <!-- Cafeterias -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp"
+                android:gravity="center">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginBottom="8dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="4dp">
+
+                    <ImageView
+                        android:id="@+id/cafeterias_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/cafeterias"
+                        android:contentDescription="Cafeterias"
+                        android:scaleType="centerCrop" />
+                </androidx.cardview.widget.CardView>
+
+                <Button
+                    android:id="@+id/cafeterias_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cafeterias"
+                    android:backgroundTint="@android:color/transparent"
+                    android:textColor="@android:color/white"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <!-- Lecturers -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp"
+                android:gravity="center">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginBottom="8dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="4dp">
+
+                    <ImageView
+                        android:id="@+id/lecturers_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/lecturers"
+                        android:contentDescription="Lecturers"
+                        android:scaleType="centerCrop" />
+                </androidx.cardview.widget.CardView>
+
+                <Button
+                    android:id="@+id/lecturers_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lecturers"
+                    android:backgroundTint="@android:color/transparent"
+                    android:textColor="@android:color/white"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <!-- Gym -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp"
+                android:gravity="center">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginBottom="8dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="4dp">
+
+                    <ImageView
+                        android:id="@+id/gym_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/gym"
+                        android:contentDescription="Gym"
+                        android:scaleType="centerCrop" />
+                </androidx.cardview.widget.CardView>
+
+                <Button
+                    android:id="@+id/gym_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gym"
+                    android:backgroundTint="@android:color/transparent"
+                    android:textColor="@android:color/white"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <!-- Technology -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp"
+                android:gravity="center">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginBottom="8dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="4dp">
+
+                    <ImageView
+                        android:id="@+id/technology_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/technology"
+                        android:contentDescription="Technology"
+                        android:scaleType="centerCrop" />
+                </androidx.cardview.widget.CardView>
+
+                <Button
+                    android:id="@+id/technology_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Technology"
+                    android:backgroundTint="@android:color/transparent"
+                    android:textColor="@android:color/white"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <!-- Location Blocks -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp"
+                android:gravity="center">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginBottom="8dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="4dp">
+
+                    <ImageView
+                        android:id="@+id/location_blocks_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/location_blocks"
+                        android:contentDescription="Location Blocks"
+                        android:scaleType="centerCrop" />
+                </androidx.cardview.widget.CardView>
+
+                <Button
+                    android:id="@+id/location_blocks_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Location Blocks"
+                    android:backgroundTint="@android:color/transparent"
+                    android:textColor="@android:color/white"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <!-- Events -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp"
+                android:gravity="center">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginBottom="8dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="4dp">
+
+                    <ImageView
+                        android:id="@+id/events_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/events"
+                        android:contentDescription="Events"
+                        android:scaleType="centerCrop" />
+                </androidx.cardview.widget.CardView>
+
+                <Button
+                    android:id="@+id/events_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Events"
+                    android:backgroundTint="@android:color/transparent"
+                    android:textColor="@android:color/white"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <!-- Meetings -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp"
+                android:gravity="center">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginBottom="8dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="4dp">
+
+                    <ImageView
+                        android:id="@+id/meetings_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/meetings"
+                        android:contentDescription="Meetings"
+                        android:scaleType="centerCrop" />
+                </androidx.cardview.widget.CardView>
+
+                <Button
+                    android:id="@+id/meetings_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Meetings"
+                    android:backgroundTint="@android:color/transparent"
+                    android:textColor="@android:color/white"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <!-- Book An Induction -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp"
+                android:gravity="center">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginBottom="8dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="4dp">
+
+                    <ImageView
+                        android:id="@+id/book_induction_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/inductions"
+                        android:contentDescription="Book An Induction"
+                        android:scaleType="centerCrop" />
+                </androidx.cardview.widget.CardView>
+
+                <Button
+                    android:id="@+id/book_induction_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Book An Induction"
+                    android:backgroundTint="@android:color/transparent"
+                    android:textColor="@android:color/white"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
