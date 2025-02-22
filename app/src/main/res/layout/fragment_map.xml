@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_map"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Your osmdroid MapView -->
+    <org.osmdroid.views.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- A simple row of buttons, pinned to the top of the screen -->
+    <LinearLayout
+        android:id="@+id/floorButtonLayout"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:background="@android:color/transparent"
+        android:padding="16dp">
+
+        <Button
+            android:id="@+id/btnGroundFloor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Floor 0" />
+
+        <Button
+            android:id="@+id/btnFirstFloor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Floor 1"
+            android:layout_marginStart="8dp" />
+
+        <Button
+            android:id="@+id/btnSecondFloor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Floor 2"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+</FrameLayout>

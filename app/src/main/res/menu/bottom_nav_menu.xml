@@ -16,4 +16,9 @@
         android:icon="@drawable/ic_settings"
         android:title="Settings" />
 
+    <item
+        android:id="@+id/mapFragment"
+        android:icon="@drawable/ic_map"
+        android:title="Map" />
+
 </menu>

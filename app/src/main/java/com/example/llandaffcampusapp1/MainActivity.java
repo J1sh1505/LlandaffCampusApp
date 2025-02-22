@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
                 } else if (id == R.id.settingsFragment) {
                     navController.navigate(R.id.settingsFragment);
                     return true;
+                } else if (id == R.id.mapFragment) {
+                    navController.navigate(R.id.mapFragment);
+                    return true;
                 }
                 return false;
             });
