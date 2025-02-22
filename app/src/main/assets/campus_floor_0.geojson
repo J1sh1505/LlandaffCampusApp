@@ -1,0 +1,62 @@
+{
+    "type": "FeatureCollection",
+    "generator": "JOSM",
+    "bbox": [
+        -3.21551800000,
+        51.49511820000,
+        -3.21086170000,
+        51.49768310000
+    ],
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "amenity": "ice_cream",
+                "name": "ice cream"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            -3.21190171011,
+                            51.49591302942
+                        ],
+                        [
+                            -3.21159727938,
+                            51.49613971290
+                        ],
+                        [
+                            -3.21148663826,
+                            51.49608919974
+                        ],
+                        [
+                            -3.21179241009,
+                            51.49585875880
+                        ],
+                        [
+                            -3.21190171011,
+                            51.49591302942
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "tourism": "information",
+                "information": "terminal",
+                "name": "Information Desk",
+                "icon": "inf_desk"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -3.21183666654,
+                    51.49585583654
+                ]
+            }
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- A classic "info" icon: circle with "i" in the center -->
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M11,7h2v2h-2z
+                         M12,3
+                         C7.58,3,4,6.58,4,11
+                         s3.58,8,8,8
+                         s8-3.58,8-8
+                         s-3.58-8-8-8z
+
+                         m0,14
+                         c-3.31,0-6-2.69-6-6
+                         c0-3.31,2.69-6,6-6
+                         c3.31,0,6,2.69,6,6
+                         C18,14.31,15.31,17,12,17z
+
+                         M11,11h2v6h-2z" />
+</vector>
