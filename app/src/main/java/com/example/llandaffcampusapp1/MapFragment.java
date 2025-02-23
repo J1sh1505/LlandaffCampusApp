@@ -7,17 +7,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.osmdroid.api.IMapController;
+import org.osmdroid.events.MapListener;
+import org.osmdroid.events.ScrollEvent;
+import org.osmdroid.events.ZoomEvent;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.Polygon;
+import org.osmdroid.views.overlay.Polyline;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +43,20 @@ public class MapFragment extends Fragment {
         GeoPoint startPoint = new GeoPoint(51.496206, -3.213042); // llandaff campus
         mapController.setCenter(startPoint);
 
+        mapView.setMapListener(new MapListener() {
+            @Override
+            public boolean onScroll(ScrollEvent event) {
+                return false;
+            }
+
+            @Override
+            public boolean onZoom(ZoomEvent event) {
+                // Reload features when zoom level changes
+                loadFloorData(getCurrentFloor());
+                return false;
+            }
+        });
+
         // Set up the buttons for floor selection -- change later
         Button btnGroundFloor = view.findViewById(R.id.btnGroundFloor);
         Button btnFirstFloor = view.findViewById(R.id.btnFirstFloor);
@@ -57,19 +76,22 @@ public class MapFragment extends Fragment {
         return view;
     }
     private void loadFloorData(String floorNumber) {
-        // Clear current overlays
+        setCurrentFloor(floorNumber);
+
+        // Clear all existing overlays AND views
         mapView.getOverlays().clear();
 
-        // Decide which file to load
+        // Remove all TextView labels
+        for (int i = mapView.getChildCount() - 1; i >= 0; i--) {
+            View child = mapView.getChildAt(i);
+            if (child instanceof TextView) {
+                mapView.removeView(child);
+            }
+        }
+
         String filename = "campus_floor_" + floorNumber + ".geojson";
-
-        // Load the file from assets
         JSONObject geoJson = GeoJsonUtils.loadGeoJsonFromAsset(getContext(), filename);
-
-        // Parse and add its features
         addGeoJsonFeatures(geoJson);
-
-        // Refresh the map
         mapView.invalidate();
     }
 
@@ -81,6 +103,10 @@ public class MapFragment extends Fragment {
         if (geoJson == null) return;
         try {
             JSONArray features = geoJson.getJSONArray("features");
+            double currentZoom = mapView.getZoomLevelDouble();
+
+            // Only show detailed features (labels, room dividers) at zoom level 18 or higher
+            boolean showDetails = currentZoom >= 20.0;
 
             for (int i = 0; i < features.length(); i++) {
                 JSONObject feature = features.getJSONObject(i);
@@ -90,22 +116,25 @@ public class MapFragment extends Fragment {
 
                 switch (type) {
                     case "Point":
-                        drawPoint(geometry.getJSONArray("coordinates"), properties);
+                        // Only draw points (labels) when zoomed in
+                        if (showDetails) {
+                            drawPoint(geometry.getJSONArray("coordinates"), properties);
+                        }
+                        break;
+
+                    case "LineString":
+                        // For room dividers/walls
+                        if (showDetails) {
+                            drawLine(geometry.getJSONArray("coordinates"), properties);
+                        }
                         break;
 
                     case "Polygon":
-                        drawPolygon(geometry.getJSONArray("coordinates"), properties);
-                        break;
-
-
-                    // Optionally handle other geometry types (e.g., LineString)
-                    default:
-                        Log.w("MapFragment", "Unsupported geometry type: " + type);
+                        drawPolygon(geometry.getJSONArray("coordinates"), properties);  // Remove the boolean parameter
                         break;
                 }
             }
-
-            mapView.invalidate(); // Refresh the map
+            mapView.invalidate();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -127,30 +156,36 @@ public class MapFragment extends Fragment {
         try {
             double lon = coords.getDouble(0);
             double lat = coords.getDouble(1);
-            Marker marker = new Marker(mapView);
-            marker.setPosition(new GeoPoint(lat, lon));
 
-            // Read the "icon" or "icon:url" property from GeoJSON
-            String iconType = properties != null ? properties.optString("icon", null) : null;
-            if (iconType != null) {
-                int iconResId = getIconResource(iconType);
-                if (iconResId != 0) {
-                    marker.setIcon(ContextCompat.getDrawable(requireContext(), iconResId));
-                }
+            // Skip marker creation, only create label if name exists
+            if (properties != null && properties.has("name")) {
+                TextView label = new TextView(requireContext());
+                label.setText(properties.getString("name"));
+                label.setTextSize(16); // Adjust size as needed
+                label.setTextColor(Color.BLACK);
+
+                // Create a layout parameter that positions the text at the coordinates
+                MapView.LayoutParams params = new MapView.LayoutParams(
+                        MapView.LayoutParams.WRAP_CONTENT,
+                        MapView.LayoutParams.WRAP_CONTENT,
+                        new GeoPoint(lat, lon),
+                        MapView.LayoutParams.CENTER,
+                        0, 0);
+
+                mapView.addView(label, params);
             }
 
-            // Title, snippet, etc.
-            marker.setTitle(properties.optString("name", "No Name"));
-            mapView.getOverlays().add(marker);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     private void drawPolygon(JSONArray coordinates, JSONObject properties) {
         try {
-            // coordinates[0] is typically the outer ring. Additional rings are holes.
+            double currentZoom = mapView.getZoomLevelDouble();
+            boolean detailed = currentZoom >= 18.0;
+
             JSONArray outerRing = coordinates.getJSONArray(0);
-            Polygon polygon = new Polygon(mapView);
+            Polygon polygon = new Polygon(mapView);  // Define the polygon object
 
             List<GeoPoint> geoPoints = new ArrayList<>();
             for (int i = 0; i < outerRing.length(); i++) {
@@ -161,30 +196,59 @@ public class MapFragment extends Fragment {
             }
             polygon.setPoints(geoPoints);
 
-
-
-            // Basic property-based styling
-            int fillColor = getFillColor(properties);
-            int strokeColor = getStrokeColor(properties);
-            float strokeWidth = getStrokeWidth(properties);
-
-            polygon.setFillColor(fillColor);
-            polygon.setStrokeColor(strokeColor);
-            polygon.setStrokeWidth(strokeWidth);
-
-            // Optional: if you'd like to show a label when tapped
-            String name = properties != null ? properties.optString("name", "No Name") : "No Name";
-            polygon.setTitle(name);
-            polygon.setOnClickListener((Polygon p, MapView mapView, GeoPoint eventPos) -> {
-                // Show the default InfoWindow
-                p.showInfoWindow();
-                return true;
-            });
+            // Adjust styling based on zoom level
+            if (detailed) {
+                polygon.setStrokeWidth(5f);
+                polygon.setStrokeColor(getStrokeColor(properties));
+                polygon.setFillColor(getFillColor(properties));
+            } else {
+                polygon.setStrokeWidth(2f);
+                polygon.setStrokeColor(getStrokeColor(properties));
+                polygon.setFillColor(Color.TRANSPARENT);  // No fill when zoomed out
+            }
 
             mapView.getOverlays().add(polygon);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void drawLine(JSONArray coordinates, JSONObject properties) {
+        try {
+            Polyline line = new Polyline(mapView);
+            List<GeoPoint> points = new ArrayList<>();
+
+            for (int i = 0; i < coordinates.length(); i++) {
+                JSONArray point = coordinates.getJSONArray(i);
+                double lon = point.getDouble(0);
+                double lat = point.getDouble(1);
+                points.add(new GeoPoint(lat, lon));
+            }
+
+            line.setPoints(points);
+            line.setColor(Color.rgb(0, 255, 0));  // Bright green like in JOSM
+            line.setWidth(8f);  // Thicker lines
+            line.setGeodesic(false);  // Force straight lines, not curved
+
+            mapView.getOverlays().add(line);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void addLabel(GeoPoint position, String label) {
+        MapView.LayoutParams layoutParams = new MapView.LayoutParams(
+                MapView.LayoutParams.WRAP_CONTENT,
+                MapView.LayoutParams.WRAP_CONTENT,
+                position,
+                MapView.LayoutParams.CENTER,
+                0, 0);
+
+        TextView text = new TextView(getContext());
+        text.setText(label);
+        text.setTextColor(Color.CYAN);  // Match JOSM color
+        text.setBackgroundColor(Color.TRANSPARENT);
+        mapView.addView(text, layoutParams);
     }
     // ========== Helper Methods for Customization ========== //
 
@@ -192,13 +256,21 @@ public class MapFragment extends Fragment {
      * Returns a fill color based on the properties, defaulting to a semi-transparent green.
      */
     private int getFillColor(JSONObject properties) {
-        if (properties == null) return 0x3300FF00; // 20% opacity green
+        if (properties == null) return Color.TRANSPARENT; // No fill at all
+
         if (properties.has("fillColor")) {
-            String colorStr = properties.optString("fillColor", "#33FF00"); // hex code
-            return parseColor(colorStr, 0x3300FF00);
+            String colorStr = properties.optString("fillColor", "#00000000");
+            return parseColor(colorStr, Color.TRANSPARENT);
         }
-        // Other property-based logic can go here (e.g., category-based colors)
-        return 0x3300FF00;
+
+        // Check if this is a building or room
+        String type = properties.optString("type", "");
+        if (type.equals("building") || type.equals("room")) {
+            return Color.argb(32, 0, 0, 0); // Very transparent black
+        }
+
+        // Default to transparent for all other polygons
+        return Color.TRANSPARENT;
     }
 
     /**
@@ -235,7 +307,15 @@ public class MapFragment extends Fragment {
             return defaultColor;
         }
     }
+    private String currentFloor = "0";  // Default to ground floor
 
+    private String getCurrentFloor() {
+        return currentFloor;
+    }
+
+    private void setCurrentFloor(String floor) {
+        currentFloor = floor;
+    }
 
 
     @Override
