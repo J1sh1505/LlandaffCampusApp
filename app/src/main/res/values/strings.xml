@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">LlandaffCampusApp1</string>
+    <string-array name="floor_array">
+        <item>F0</item>
+        <item>F1</item>
+        <item>F2</item>
+        <item>F3</item>
+    </string-array>
 </resources>
