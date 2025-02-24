@@ -1,15 +1,15 @@
 package com.example.llandaffcampusapp1;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -20,7 +20,7 @@ import org.osmdroid.events.ZoomEvent;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.Marker;
+import org.osmdroid.views.overlay.Overlay;
 import org.osmdroid.views.overlay.Polygon;
 import org.osmdroid.views.overlay.Polyline;
 
@@ -42,7 +42,6 @@ public class MapFragment extends Fragment {
         mapController.setZoom(18.0);
         GeoPoint startPoint = new GeoPoint(51.496206, -3.213042); // llandaff campus
         mapController.setCenter(startPoint);
-
         mapView.setMapListener(new MapListener() {
             @Override
             public boolean onScroll(ScrollEvent event) {
@@ -51,10 +50,11 @@ public class MapFragment extends Fragment {
 
             @Override
             public boolean onZoom(ZoomEvent event) {
-                // Reload features when zoom level changes
+                // Reload when zoom level changes
                 loadFloorData(getCurrentFloor());
                 return false;
             }
+
         });
 
         // Set up the buttons for floor selection -- change later
@@ -72,13 +72,18 @@ public class MapFragment extends Fragment {
         // Load the custom GeoJSON data and add its features to the map.
         JSONObject geoJson = GeoJsonUtils.loadGeoJsonFromAsset(getContext(), "campus_floor_0.geojson");
         addGeoJsonFeatures(geoJson);
+        mapView.invalidate(); //Reload map without user having to zoom/move map to load overlays
+
+
 
         return view;
+
     }
+
     private void loadFloorData(String floorNumber) {
         setCurrentFloor(floorNumber);
 
-        // Clear all existing overlays AND views
+        // Clear overlays and views
         mapView.getOverlays().clear();
 
         // Remove all TextView labels
@@ -95,6 +100,29 @@ public class MapFragment extends Fragment {
         mapView.invalidate();
     }
 
+    private void addBuildingLabel(GeoPoint position, String buildingLetter) {
+        TextView label = new TextView(requireContext());
+        label.setText(buildingLetter);
+        label.setTypeface(null, Typeface.BOLD);
+
+        double currentZoom = mapView.getZoomLevelDouble();
+        float textSize = (float)(currentZoom * 1.2); //text size
+        label.setTextSize(textSize);
+
+        //styling: background, text colour of block labels
+        label.setTextColor(Color.BLACK);
+        label.setBackgroundColor(Color.TRANSPARENT);
+        label.setPadding(8, 4, 8, 4);
+
+        MapView.LayoutParams params = new MapView.LayoutParams(
+                MapView.LayoutParams.WRAP_CONTENT,
+                MapView.LayoutParams.WRAP_CONTENT,
+                position,
+                MapView.LayoutParams.CENTER,
+                0, 0);
+
+        mapView.addView(label, params);
+    }
 
     /**
      * Parses GeoJSON features and adds them (markers, polygons, etc.) to the map.
@@ -104,9 +132,7 @@ public class MapFragment extends Fragment {
         try {
             JSONArray features = geoJson.getJSONArray("features");
             double currentZoom = mapView.getZoomLevelDouble();
-
-            // Only show detailed features (labels, room dividers) at zoom level 18 or higher
-            boolean showDetails = currentZoom >= 20.0;
+            boolean showDetails = currentZoom >= 20.0;  // Only show rooms at zoom level 20 or more
 
             for (int i = 0; i < features.length(); i++) {
                 JSONObject feature = features.getJSONObject(i);
@@ -114,6 +140,22 @@ public class MapFragment extends Fragment {
                 JSONObject properties = feature.optJSONObject("properties");
                 String type = geometry.getString("type");
 
+                // Check for building label nodes
+                if ("Point".equals(type) &&
+                        properties != null &&
+                        "building".equals(properties.optString("type"))) {
+
+                    String buildingLetter = properties.optString("building_letter", "");
+                    if (!buildingLetter.isEmpty()) {
+                        JSONArray coords = geometry.getJSONArray("coordinates");
+                        double lon = coords.getDouble(0);
+                        double lat = coords.getDouble(1);
+                        addBuildingLabel(new GeoPoint(lat, lon), buildingLetter);
+                    }
+                    continue;  // Skip further processing for building label points
+                }
+
+                // Handle other feature types
                 switch (type) {
                     case "Point":
                         // Only draw points (labels) when zoomed in
@@ -130,7 +172,7 @@ public class MapFragment extends Fragment {
                         break;
 
                     case "Polygon":
-                        drawPolygon(geometry.getJSONArray("coordinates"), properties);  // Remove the boolean parameter
+                        drawPolygon(geometry.getJSONArray("coordinates"), properties);
                         break;
                 }
             }
@@ -161,7 +203,7 @@ public class MapFragment extends Fragment {
             if (properties != null && properties.has("name")) {
                 TextView label = new TextView(requireContext());
                 label.setText(properties.getString("name"));
-                label.setTextSize(16); // Adjust size as needed
+                label.setTextSize(16);
                 label.setTextColor(Color.BLACK);
 
                 // Create a layout parameter that positions the text at the coordinates
@@ -197,6 +239,7 @@ public class MapFragment extends Fragment {
             polygon.setPoints(geoPoints);
 
             // Adjust styling based on zoom level
+            //TODO: find undeprecated methods maybe? Or not, seems to work fine
             if (detailed) {
                 polygon.setStrokeWidth(5f);
                 polygon.setStrokeColor(getStrokeColor(properties));
@@ -208,6 +251,15 @@ public class MapFragment extends Fragment {
             }
 
             mapView.getOverlays().add(polygon);
+
+            polygon.setOnClickListener(new Polygon.OnClickListener() {
+                @Override
+                public boolean onClick(Polygon polygon, MapView mapView, GeoPoint eventPos) {
+                    // Consume tap events to prevent annoying speech bubble from
+                    // appearing when tapping areas overlaid with polygons
+                    return true;
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -231,25 +283,21 @@ public class MapFragment extends Fragment {
             line.setGeodesic(false);  // Force straight lines, not curved
 
             mapView.getOverlays().add(line);
+
+            line.setOnClickListener(new Polyline.OnClickListener() {
+                @Override
+                public boolean onClick(Polyline polyline, MapView mapView, GeoPoint eventPos) {
+                    // Same as for polygons, consume tap events to prevent annoying speech bubbles
+                    //from appearing when lines are tapped
+                    return true;
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void addLabel(GeoPoint position, String label) {
-        MapView.LayoutParams layoutParams = new MapView.LayoutParams(
-                MapView.LayoutParams.WRAP_CONTENT,
-                MapView.LayoutParams.WRAP_CONTENT,
-                position,
-                MapView.LayoutParams.CENTER,
-                0, 0);
 
-        TextView text = new TextView(getContext());
-        text.setText(label);
-        text.setTextColor(Color.CYAN);  // Match JOSM color
-        text.setBackgroundColor(Color.TRANSPARENT);
-        mapView.addView(text, layoutParams);
-    }
     // ========== Helper Methods for Customization ========== //
 
     /**
