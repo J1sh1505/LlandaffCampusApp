@@ -1,8 +1,11 @@
 package com.example.llandaffcampusapp1;
 
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -29,6 +32,8 @@ import java.util.List;
 
 public class MapFragment extends Fragment {
     private MapView mapView;
+    private Runnable zoomUpdateRunnable;
+    private final Handler handler = new Handler(Looper.getMainLooper());
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,6 +47,7 @@ public class MapFragment extends Fragment {
         mapController.setZoom(18.0);
         GeoPoint startPoint = new GeoPoint(51.496206, -3.213042); // llandaff campus
         mapController.setCenter(startPoint);
+        //TODO: Change to MapEventsReceiver as this is deprecated
         mapView.setMapListener(new MapListener() {
             @Override
             public boolean onScroll(ScrollEvent event) {
@@ -50,8 +56,16 @@ public class MapFragment extends Fragment {
 
             @Override
             public boolean onZoom(ZoomEvent event) {
-                // Reload when zoom level changes
-                loadFloorData(getCurrentFloor());
+                //cancel any pending updates
+                if (zoomUpdateRunnable != null) {
+                    handler.removeCallbacks(zoomUpdateRunnable);
+                }
+                // Schedule a single update after zooming stops
+                //instead of updating every time the zoom level changes
+                //which could be multiple times a second with pinch to zoom
+                //leading to dropped frames/performance issues
+                zoomUpdateRunnable = () -> loadFloorData(getCurrentFloor());
+                handler.postDelayed(zoomUpdateRunnable, 300);
                 return false;
             }
 
@@ -72,9 +86,6 @@ public class MapFragment extends Fragment {
         // Load the custom GeoJSON data and add its features to the map.
         JSONObject geoJson = GeoJsonUtils.loadGeoJsonFromAsset(getContext(), "campus_floor_0.geojson");
         addGeoJsonFeatures(geoJson);
-        mapView.invalidate(); //Reload map without user having to zoom/move map to load overlays
-
-
 
         return view;
 
@@ -103,7 +114,7 @@ public class MapFragment extends Fragment {
     private void addBuildingLabel(GeoPoint position, String buildingLetter) {
         TextView label = new TextView(requireContext());
         label.setText(buildingLetter);
-        label.setTypeface(null, Typeface.BOLD);
+
 
         double currentZoom = mapView.getZoomLevelDouble();
         float textSize = (float)(currentZoom * 1.2); //text size
@@ -113,6 +124,7 @@ public class MapFragment extends Fragment {
         label.setTextColor(Color.BLACK);
         label.setBackgroundColor(Color.TRANSPARENT);
         label.setPadding(8, 4, 8, 4);
+        label.setTypeface(null, Typeface.BOLD);
 
         MapView.LayoutParams params = new MapView.LayoutParams(
                 MapView.LayoutParams.WRAP_CONTENT,
@@ -141,6 +153,8 @@ public class MapFragment extends Fragment {
                 String type = geometry.getString("type");
 
                 // Check for building label nodes
+                //Node must have type "Point" and have a"type" property with value of "building"
+                //and a "building_letter" property with the correct block
                 if ("Point".equals(type) &&
                         properties != null &&
                         "building".equals(properties.optString("type"))) {
@@ -238,17 +252,12 @@ public class MapFragment extends Fragment {
             }
             polygon.setPoints(geoPoints);
 
-            // Adjust styling based on zoom level
-            //TODO: find undeprecated methods maybe? Or not, seems to work fine
-            if (detailed) {
-                polygon.setStrokeWidth(5f);
-                polygon.setStrokeColor(getStrokeColor(properties));
-                polygon.setFillColor(getFillColor(properties));
-            } else {
-                polygon.setStrokeWidth(2f);
-                polygon.setStrokeColor(getStrokeColor(properties));
-                polygon.setFillColor(Color.TRANSPARENT);  // No fill when zoomed out
-            }
+            Paint outlinePaint = polygon.getOutlinePaint();
+            outlinePaint.setColor(getStrokeColor(properties));
+            outlinePaint.setStrokeWidth(detailed ? 5f : 2f);
+
+            Paint fillPaint = polygon.getFillPaint();
+            fillPaint.setColor(detailed ? getFillColor(properties) : Color.TRANSPARENT);
 
             mapView.getOverlays().add(polygon);
 
@@ -278,9 +287,11 @@ public class MapFragment extends Fragment {
             }
 
             line.setPoints(points);
-            line.setColor(Color.rgb(0, 255, 0));  // Bright green like in JOSM
-            line.setWidth(8f);  // Thicker lines
-            line.setGeodesic(false);  // Force straight lines, not curved
+            // Set the outline color and width
+            // changed to Paint
+            Paint paint = line.getOutlinePaint();
+            paint.setColor(Color.rgb(0, 255, 0));
+            paint.setStrokeWidth(8f);
 
             mapView.getOverlays().add(line);
 
