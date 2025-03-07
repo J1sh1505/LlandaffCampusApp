@@ -3,16 +3,18 @@ package com.example.llandaffcampusapp1;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -23,7 +25,7 @@ import org.osmdroid.events.ZoomEvent;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.Overlay;
+import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.Polygon;
 import org.osmdroid.views.overlay.Polyline;
 
@@ -65,7 +67,7 @@ public class MapFragment extends Fragment {
                 //which could be multiple times a second with pinch to zoom
                 //leading to dropped frames/performance issues
                 zoomUpdateRunnable = () -> loadFloorData(getCurrentFloor());
-                handler.postDelayed(zoomUpdateRunnable, 300);
+                handler.postDelayed(zoomUpdateRunnable, 50);
                 return false;
             }
 
@@ -144,7 +146,7 @@ public class MapFragment extends Fragment {
         try {
             JSONArray features = geoJson.getJSONArray("features");
             double currentZoom = mapView.getZoomLevelDouble();
-            boolean showDetails = currentZoom >= 20.0;  // Only show rooms at zoom level 20 or more
+            boolean showDetails = currentZoom >= 21;  // Only show rooms at zoom level 22 or more
 
             for (int i = 0; i < features.length(); i++) {
                 JSONObject feature = features.getJSONObject(i);
@@ -172,7 +174,7 @@ public class MapFragment extends Fragment {
                 // Handle other feature types
                 switch (type) {
                     case "Point":
-                        // Only draw points (labels) when zoomed in
+                        // Only draw points (labels or icons) when zoomed in
                         if (showDetails) {
                             drawPoint(geometry.getJSONArray("coordinates"), properties);
                         }
@@ -197,44 +199,88 @@ public class MapFragment extends Fragment {
     }
 
     private int getIconResource(String iconType) {
+        if (iconType == null || iconType.isEmpty()) {
+            return 0;
+        }
+
         switch (iconType) {
-            case "my_custom_icon":
+            case "information":
             case "inf_desk":
                 return R.drawable.ic_inf_desk;
             case "library":
-
-            // Add more as needed
+                return R.drawable.ic_library2;
+            case "food":
+                return R.drawable.ic_food;
+            case "toilet":
+            case "restroom":
+                return R.drawable.ic_toilet;
+            case "elevator":
+            case "lift":
+            case "gym":
+                return R.drawable.ic_gym;
+            case "it":
+                return R.drawable.ic_it;
+            case "parking":
+                return R.drawable.ic_parking;
             default:
-                return 0; // 0 means not found
+                return 0; //not found
         }
     }
+
     private void drawPoint(JSONArray coords, JSONObject properties) {
         try {
             double lon = coords.getDouble(0);
             double lat = coords.getDouble(1);
+            GeoPoint point = new GeoPoint(lat, lon);
 
-            // Skip marker creation, only create label if name exists
-            if (properties != null && properties.has("name")) {
+            //check if icon specified in properties
+            String iconType = properties != null ? properties.optString("icon_type", "") : "";
+            int iconResource = getIconResource(iconType);
+
+            if (iconResource != 0) {
+                //create marker with icon
+                Marker marker = new Marker(mapView);
+                marker.setPosition(point);
+
+                //set icon
+                Drawable icon = ContextCompat.getDrawable(requireContext(), iconResource);
+                marker.setIcon(icon);
+
+                //set anchor to center-bottom of icon
+                marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+
+                //set title if name is available (for popup info)
+                if (properties != null && properties.has("name")) {
+                    marker.setTitle(properties.getString("name"));
+                }
+                //add to map
+                mapView.getOverlays().add(marker);
+
+
+            } else if (properties != null && properties.has("name")) {
+                //if no icon but has name crate a text label
                 TextView label = new TextView(requireContext());
                 label.setText(properties.getString("name"));
-                label.setTextSize(16);
+                label.setTextSize(10);
                 label.setTextColor(Color.BLACK);
+                label.setBackgroundColor(Color.TRANSPARENT);
+                label.setPadding(8, 4, 8, 4);
 
-                // Create a layout parameter that positions the text at the coordinates
+                // make a layout parameter - positions text at coordinates
                 MapView.LayoutParams params = new MapView.LayoutParams(
                         MapView.LayoutParams.WRAP_CONTENT,
                         MapView.LayoutParams.WRAP_CONTENT,
-                        new GeoPoint(lat, lon),
+                        point,
                         MapView.LayoutParams.CENTER,
                         0, 0);
 
                 mapView.addView(label, params);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     private void drawPolygon(JSONArray coordinates, JSONObject properties) {
         try {
             double currentZoom = mapView.getZoomLevelDouble();
@@ -261,13 +307,10 @@ public class MapFragment extends Fragment {
 
             mapView.getOverlays().add(polygon);
 
-            polygon.setOnClickListener(new Polygon.OnClickListener() {
-                @Override
-                public boolean onClick(Polygon polygon, MapView mapView, GeoPoint eventPos) {
-                    // Consume tap events to prevent annoying speech bubble from
-                    // appearing when tapping areas overlaid with polygons
-                    return true;
-                }
+            polygon.setOnClickListener((polygon1, mapView, eventPos) -> {
+                // Consume tap events to prevent annoying speech bubble from
+                // appearing when tapping areas overlaid with polygons
+                return true;
             });
         } catch (Exception e) {
             e.printStackTrace();
@@ -295,13 +338,10 @@ public class MapFragment extends Fragment {
 
             mapView.getOverlays().add(line);
 
-            line.setOnClickListener(new Polyline.OnClickListener() {
-                @Override
-                public boolean onClick(Polyline polyline, MapView mapView, GeoPoint eventPos) {
-                    // Same as for polygons, consume tap events to prevent annoying speech bubbles
-                    //from appearing when lines are tapped
-                    return true;
-                }
+            line.setOnClickListener((polyline, mapView, eventPos) -> {
+                // Same as for polygons, consume tap events to prevent annoying speech bubbles
+                //from appearing when lines are tapped
+                return true;
             });
         } catch (Exception e) {
             e.printStackTrace();
