@@ -23,6 +23,7 @@ import org.osmdroid.events.MapListener;
 import org.osmdroid.events.ScrollEvent;
 import org.osmdroid.events.ZoomEvent;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.BoundingBox;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
@@ -37,6 +38,18 @@ public class MapFragment extends Fragment {
     private Runnable zoomUpdateRunnable;
     private final Handler handler = new Handler(Looper.getMainLooper());
 
+
+    // coordinates form a box around the campus
+    //confining users to just the llandaff campus
+    private static final double NORTH_LAT = 51.498556; // north
+    private static final double SOUTH_LAT = 51.493856; // south
+    private static final double WEST_LON = -3.216342;  // west
+    private static final double EAST_LON = -3.209742;  // east
+
+    // Define zoom level limits
+    private static final double MIN_ZOOM = 18.1; //min zoom
+    private static final double MAX_ZOOM = 22.0; // max zoom (closest in)
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,14 +58,26 @@ public class MapFragment extends Fragment {
         mapView.setTileSource(TileSourceFactory.MAPNIK);
         mapView.setMultiTouchControls(true);
 
+        //set zoom limits
+        mapView.setMinZoomLevel(MIN_ZOOM);
+        mapView.setMaxZoomLevel(MAX_ZOOM);
+
+        //create boundary box
+        final BoundingBox campusBounds = new BoundingBox(
+                NORTH_LAT, EAST_LON, SOUTH_LAT, WEST_LON);
+        mapView.setScrollableAreaLimitDouble(campusBounds);
+
         IMapController mapController = mapView.getController();
-        mapController.setZoom(18.0);
+        mapController.setZoom(18.1);
         GeoPoint startPoint = new GeoPoint(51.496206, -3.213042); // llandaff campus
         mapController.setCenter(startPoint);
+
         //TODO: Change to MapEventsReceiver as this is deprecated
         mapView.setMapListener(new MapListener() {
             @Override
             public boolean onScroll(ScrollEvent event) {
+                // enforce bounds always
+                enforceMapBounds();
                 return false;
             }
 
@@ -66,11 +91,13 @@ public class MapFragment extends Fragment {
                 //instead of updating every time the zoom level changes
                 //which could be multiple times a second with pinch to zoom
                 //leading to dropped frames/performance issues
-                zoomUpdateRunnable = () -> loadFloorData(getCurrentFloor());
+                zoomUpdateRunnable = () -> {
+                    enforceZoomLimits();
+                    loadFloorData(getCurrentFloor());
+                };
                 handler.postDelayed(zoomUpdateRunnable, 50);
                 return false;
             }
-
         });
 
         // Set up the buttons for floor selection -- change later
@@ -90,7 +117,60 @@ public class MapFragment extends Fragment {
         addGeoJsonFeatures(geoJson);
 
         return view;
+    }
 
+    /**
+     * backup/verify if map bugs out and crosses out of bounds
+     */
+    private void enforceMapBounds() {
+        if (mapView == null) return;
+
+        // get  center
+        GeoPoint center = (GeoPoint) mapView.getMapCenter();
+        double lat = center.getLatitude();
+        double lon = center.getLongitude();
+
+        // check if centre needs adjusting
+        boolean needsAdjustment = false;
+
+        // clamp latitude
+        if (lat > NORTH_LAT) {
+            lat = NORTH_LAT;
+            needsAdjustment = true;
+        } else if (lat < SOUTH_LAT) {
+            lat = SOUTH_LAT;
+            needsAdjustment = true;
+        }
+
+        // clamp longitude
+        if (lon < WEST_LON) {
+            lon = WEST_LON;
+            needsAdjustment = true;
+        } else if (lon > EAST_LON) {
+            lon = EAST_LON;
+            needsAdjustment = true;
+        }
+
+        // if OOB, animate to centre
+        if (needsAdjustment) {
+            final GeoPoint adjustedCenter = new GeoPoint(lat, lon);
+            mapView.getController().animateTo(adjustedCenter);
+        }
+    }
+
+    /**
+     * backup/verify zoom level doesn't bug out/go OOB
+     */
+    private void enforceZoomLimits() {
+        if (mapView == null) return;
+
+        double currentZoom = mapView.getZoomLevelDouble();
+
+        if (currentZoom < MIN_ZOOM) {
+            mapView.getController().setZoom(MIN_ZOOM);
+        } else if (currentZoom > MAX_ZOOM) {
+            mapView.getController().setZoom(MAX_ZOOM);
+        }
     }
 
     private void loadFloorData(String floorNumber) {
@@ -421,6 +501,9 @@ public class MapFragment extends Fragment {
     public void onResume() {
         super.onResume();
         mapView.onResume();
+        // ensure bounds/zoom are correct upon resuming
+        enforceMapBounds();
+        enforceZoomLimits();
     }
 
     @Override
