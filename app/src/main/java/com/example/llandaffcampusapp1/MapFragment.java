@@ -3,16 +3,18 @@ package com.example.llandaffcampusapp1;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -21,9 +23,10 @@ import org.osmdroid.events.MapListener;
 import org.osmdroid.events.ScrollEvent;
 import org.osmdroid.events.ZoomEvent;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.BoundingBox;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.Overlay;
+import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.Polygon;
 import org.osmdroid.views.overlay.Polyline;
 
@@ -35,6 +38,18 @@ public class MapFragment extends Fragment {
     private Runnable zoomUpdateRunnable;
     private final Handler handler = new Handler(Looper.getMainLooper());
 
+
+    // coordinates form a box around the campus
+    //confining users to just the llandaff campus
+    private static final double NORTH_LAT = 51.498556; // north
+    private static final double SOUTH_LAT = 51.493856; // south
+    private static final double WEST_LON = -3.216342;  // west
+    private static final double EAST_LON = -3.209742;  // east
+
+    // Define zoom level limits
+    private static final double MIN_ZOOM = 18.1; //min zoom
+    private static final double MAX_ZOOM = 22.0; // max zoom (closest in)
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -43,14 +58,26 @@ public class MapFragment extends Fragment {
         mapView.setTileSource(TileSourceFactory.MAPNIK);
         mapView.setMultiTouchControls(true);
 
+        //set zoom limits
+        mapView.setMinZoomLevel(MIN_ZOOM);
+        mapView.setMaxZoomLevel(MAX_ZOOM);
+
+        //create boundary box
+        final BoundingBox campusBounds = new BoundingBox(
+                NORTH_LAT, EAST_LON, SOUTH_LAT, WEST_LON);
+        mapView.setScrollableAreaLimitDouble(campusBounds);
+
         IMapController mapController = mapView.getController();
-        mapController.setZoom(18.0);
+        mapController.setZoom(18.1);
         GeoPoint startPoint = new GeoPoint(51.496206, -3.213042); // llandaff campus
         mapController.setCenter(startPoint);
+
         //TODO: Change to MapEventsReceiver as this is deprecated
         mapView.setMapListener(new MapListener() {
             @Override
             public boolean onScroll(ScrollEvent event) {
+                // enforce bounds always
+                enforceMapBounds();
                 return false;
             }
 
@@ -64,11 +91,13 @@ public class MapFragment extends Fragment {
                 //instead of updating every time the zoom level changes
                 //which could be multiple times a second with pinch to zoom
                 //leading to dropped frames/performance issues
-                zoomUpdateRunnable = () -> loadFloorData(getCurrentFloor());
-                handler.postDelayed(zoomUpdateRunnable, 300);
+                zoomUpdateRunnable = () -> {
+                    enforceZoomLimits();
+                    loadFloorData(getCurrentFloor());
+                };
+                handler.postDelayed(zoomUpdateRunnable, 50);
                 return false;
             }
-
         });
 
         // Set up the buttons for floor selection -- change later
@@ -88,7 +117,60 @@ public class MapFragment extends Fragment {
         addGeoJsonFeatures(geoJson);
 
         return view;
+    }
 
+    /**
+     * backup/verify if map bugs out and crosses out of bounds
+     */
+    private void enforceMapBounds() {
+        if (mapView == null) return;
+
+        // get  center
+        GeoPoint center = (GeoPoint) mapView.getMapCenter();
+        double lat = center.getLatitude();
+        double lon = center.getLongitude();
+
+        // check if centre needs adjusting
+        boolean needsAdjustment = false;
+
+        // clamp latitude
+        if (lat > NORTH_LAT) {
+            lat = NORTH_LAT;
+            needsAdjustment = true;
+        } else if (lat < SOUTH_LAT) {
+            lat = SOUTH_LAT;
+            needsAdjustment = true;
+        }
+
+        // clamp longitude
+        if (lon < WEST_LON) {
+            lon = WEST_LON;
+            needsAdjustment = true;
+        } else if (lon > EAST_LON) {
+            lon = EAST_LON;
+            needsAdjustment = true;
+        }
+
+        // if OOB, animate to centre
+        if (needsAdjustment) {
+            final GeoPoint adjustedCenter = new GeoPoint(lat, lon);
+            mapView.getController().animateTo(adjustedCenter);
+        }
+    }
+
+    /**
+     * backup/verify zoom level doesn't bug out/go OOB
+     */
+    private void enforceZoomLimits() {
+        if (mapView == null) return;
+
+        double currentZoom = mapView.getZoomLevelDouble();
+
+        if (currentZoom < MIN_ZOOM) {
+            mapView.getController().setZoom(MIN_ZOOM);
+        } else if (currentZoom > MAX_ZOOM) {
+            mapView.getController().setZoom(MAX_ZOOM);
+        }
     }
 
     private void loadFloorData(String floorNumber) {
@@ -144,7 +226,7 @@ public class MapFragment extends Fragment {
         try {
             JSONArray features = geoJson.getJSONArray("features");
             double currentZoom = mapView.getZoomLevelDouble();
-            boolean showDetails = currentZoom >= 20.0;  // Only show rooms at zoom level 20 or more
+            boolean showDetails = currentZoom >= 21;  // Only show rooms at zoom level 22 or more
 
             for (int i = 0; i < features.length(); i++) {
                 JSONObject feature = features.getJSONObject(i);
@@ -172,7 +254,7 @@ public class MapFragment extends Fragment {
                 // Handle other feature types
                 switch (type) {
                     case "Point":
-                        // Only draw points (labels) when zoomed in
+                        // Only draw points (labels or icons) when zoomed in
                         if (showDetails) {
                             drawPoint(geometry.getJSONArray("coordinates"), properties);
                         }
@@ -197,44 +279,88 @@ public class MapFragment extends Fragment {
     }
 
     private int getIconResource(String iconType) {
+        if (iconType == null || iconType.isEmpty()) {
+            return 0;
+        }
+
         switch (iconType) {
-            case "my_custom_icon":
+            case "information":
             case "inf_desk":
                 return R.drawable.ic_inf_desk;
             case "library":
-
-            // Add more as needed
+                return R.drawable.ic_library2;
+            case "food":
+                return R.drawable.ic_food;
+            case "toilet":
+            case "restroom":
+                return R.drawable.ic_toilet;
+            case "elevator":
+            case "lift":
+            case "gym":
+                return R.drawable.ic_gym;
+            case "it":
+                return R.drawable.ic_it;
+            case "parking":
+                return R.drawable.ic_parking;
             default:
-                return 0; // 0 means not found
+                return 0; //not found
         }
     }
+
     private void drawPoint(JSONArray coords, JSONObject properties) {
         try {
             double lon = coords.getDouble(0);
             double lat = coords.getDouble(1);
+            GeoPoint point = new GeoPoint(lat, lon);
 
-            // Skip marker creation, only create label if name exists
-            if (properties != null && properties.has("name")) {
+            //check if icon specified in properties
+            String iconType = properties != null ? properties.optString("icon_type", "") : "";
+            int iconResource = getIconResource(iconType);
+
+            if (iconResource != 0) {
+                //create marker with icon
+                Marker marker = new Marker(mapView);
+                marker.setPosition(point);
+
+                //set icon
+                Drawable icon = ContextCompat.getDrawable(requireContext(), iconResource);
+                marker.setIcon(icon);
+
+                //set anchor to center-bottom of icon
+                marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+
+                //set title if name is available (for popup info)
+                if (properties != null && properties.has("name")) {
+                    marker.setTitle(properties.getString("name"));
+                }
+                //add to map
+                mapView.getOverlays().add(marker);
+
+
+            } else if (properties != null && properties.has("name")) {
+                //if no icon but has name crate a text label
                 TextView label = new TextView(requireContext());
                 label.setText(properties.getString("name"));
-                label.setTextSize(16);
+                label.setTextSize(10);
                 label.setTextColor(Color.BLACK);
+                label.setBackgroundColor(Color.TRANSPARENT);
+                label.setPadding(8, 4, 8, 4);
 
-                // Create a layout parameter that positions the text at the coordinates
+                // make a layout parameter - positions text at coordinates
                 MapView.LayoutParams params = new MapView.LayoutParams(
                         MapView.LayoutParams.WRAP_CONTENT,
                         MapView.LayoutParams.WRAP_CONTENT,
-                        new GeoPoint(lat, lon),
+                        point,
                         MapView.LayoutParams.CENTER,
                         0, 0);
 
                 mapView.addView(label, params);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     private void drawPolygon(JSONArray coordinates, JSONObject properties) {
         try {
             double currentZoom = mapView.getZoomLevelDouble();
@@ -261,13 +387,10 @@ public class MapFragment extends Fragment {
 
             mapView.getOverlays().add(polygon);
 
-            polygon.setOnClickListener(new Polygon.OnClickListener() {
-                @Override
-                public boolean onClick(Polygon polygon, MapView mapView, GeoPoint eventPos) {
-                    // Consume tap events to prevent annoying speech bubble from
-                    // appearing when tapping areas overlaid with polygons
-                    return true;
-                }
+            polygon.setOnClickListener((polygon1, mapView, eventPos) -> {
+                // Consume tap events to prevent annoying speech bubble from
+                // appearing when tapping areas overlaid with polygons
+                return true;
             });
         } catch (Exception e) {
             e.printStackTrace();
@@ -295,13 +418,10 @@ public class MapFragment extends Fragment {
 
             mapView.getOverlays().add(line);
 
-            line.setOnClickListener(new Polyline.OnClickListener() {
-                @Override
-                public boolean onClick(Polyline polyline, MapView mapView, GeoPoint eventPos) {
-                    // Same as for polygons, consume tap events to prevent annoying speech bubbles
-                    //from appearing when lines are tapped
-                    return true;
-                }
+            line.setOnClickListener((polyline, mapView, eventPos) -> {
+                // Same as for polygons, consume tap events to prevent annoying speech bubbles
+                //from appearing when lines are tapped
+                return true;
             });
         } catch (Exception e) {
             e.printStackTrace();
@@ -381,6 +501,9 @@ public class MapFragment extends Fragment {
     public void onResume() {
         super.onResume();
         mapView.onResume();
+        // ensure bounds/zoom are correct upon resuming
+        enforceMapBounds();
+        enforceZoomLimits();
     }
 
     @Override
