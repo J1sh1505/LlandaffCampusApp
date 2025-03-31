@@ -285,23 +285,35 @@ public class MapFragment extends Fragment {
 
         switch (iconType) {
             case "information":
-            case "inf_desk":
+            case "info":
                 return R.drawable.ic_inf_desk;
             case "library":
                 return R.drawable.ic_library2;
+            case "stairs":
+                return R.drawable.ic_stairs;
             case "food":
                 return R.drawable.ic_food;
+            case "computer":
+                return R.drawable.ic_computer;
             case "toilet":
             case "restroom":
                 return R.drawable.ic_toilet;
+            case "accessible":
+                return R.drawable.ic_accessible;
+            case "coffee":
+                return R.drawable.ic_coffee;
+            case "table":
+                return R.drawable.ic_tables;
             case "elevator":
-            case "lift":
+                return R.drawable.ic_elevator;
             case "gym":
                 return R.drawable.ic_gym;
             case "it":
                 return R.drawable.ic_it;
             case "parking":
                 return R.drawable.ic_parking;
+            case "lecture":
+                return R.drawable.ic_lecture;
             default:
                 return 0; //not found
         }
