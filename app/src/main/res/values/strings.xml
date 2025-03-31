@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">LlandaffCampusApp1</string>
+    <string name="close_legend">Close legend</string>
+    <string name="floor_1">Floor 1</string>
+    <string name="floor_2">Floor 2</string>
+    <string name="legend">Legend</string>
+    <string name="ground_floor">Ground Floor</string>
+    <string name="language_title">Choose a Language</string>
+    <string name="english_option">English</string>
+    <string name="welsh_option">Welsh</string>
+    <string name="text_size_title">Choose a Text Size</string>
+    <string name="text_size_normal">Normal</string>
+    <string name="text_size_large">Large</string>
+    <string name="reset_button_text">Reset</string>
 </resources>

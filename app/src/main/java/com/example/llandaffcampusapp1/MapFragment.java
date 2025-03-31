@@ -104,10 +104,17 @@ public class MapFragment extends Fragment {
         Button btnGroundFloor = view.findViewById(R.id.btnGroundFloor);
         Button btnFirstFloor = view.findViewById(R.id.btnFirstFloor);
         Button btnSecondFloor = view.findViewById(R.id.btnSecondFloor);
+        Button btnLegend = view.findViewById(R.id.btnLegend);
 
         btnGroundFloor.setOnClickListener(v -> loadFloorData("0"));
         btnFirstFloor.setOnClickListener(v -> loadFloorData("1"));
         btnSecondFloor.setOnClickListener(v -> loadFloorData("2"));
+        
+        //init Legend btn, nav to Legend/index
+        btnLegend.setOnClickListener(v -> {
+            androidx.navigation.Navigation.findNavController(view)
+                .navigate(R.id.action_mapFragment_to_mapIndexFragment);
+        });
 
         // Loads ground floor by default
         loadFloorData("0");
