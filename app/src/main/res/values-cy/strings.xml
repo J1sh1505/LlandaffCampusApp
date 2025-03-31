@@ -6,4 +6,30 @@
     <string name="floor_2">Llawr 2</string>
     <string name="legend">Allwedd</string>
     <string name="ground_floor">Lllawr Gwaelod</string>
+    <string name="language_title">Dewis Iaith</string>
+    <string name="english_option">Saesneg</string>
+    <string name="welsh_option">Cymraeg</string>
+    <string name="text_size_title">Dewis Maint Testun</string>
+    <string name="text_size_normal">Normal</string>
+    <string name="text_size_large">Mawr</string>
+    <string name="reset_button_text">Ailosod</string>
+    <string name="home">Cartref</string>
+    <string name="explore">Archwilio</string>
+    <string name="settings">Gosodiadau</string>
+    <string name="map">Map</string>
+    
+    <string name="legend_info_desk">Desg Wybodaeth</string>
+    <string name="legend_library">Llyfrgell</string>
+    <string name="legend_stairs">Grisiau</string>
+    <string name="legend_food">Bwyty/Ffreutur</string>
+    <string name="legend_computer">Labordy Cyfrifiaduron</string>
+    <string name="legend_toilet">Toiledau</string>
+    <string name="legend_accessible">Cyfleusterau Hygyrch</string>
+    <string name="legend_coffee">Siop Goffi</string>
+    <string name="legend_tables">Byrddau Astudio</string>
+    <string name="legend_elevator">Lifft</string>
+    <string name="legend_gym">Canolfan Ffitrwydd</string>
+    <string name="legend_it">Cymorth TG</string>
+    <string name="legend_parking">Parcio</string>
+    <string name="legend_lecture">Neuadd Ddarlithio</string>
 </resources>

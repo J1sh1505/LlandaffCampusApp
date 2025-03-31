@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/dark_gray"
     tools:context=".MapIndexFragment">
 
     <ScrollView
@@ -19,10 +21,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/legend"
-                android:textSize="24sp"
+                android:textSize="28sp"
                 android:textStyle="bold"
+                android:textColor="@android:color/white"
                 android:gravity="center"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginBottom="24dp" />
 
             <TableLayout
                 android:id="@+id/legend_table"
@@ -33,7 +36,7 @@
             </TableLayout>
         </LinearLayout>
     </ScrollView>
-<!-- cls button -->
+
     <ImageButton
         android:id="@+id/btnClose"
         android:layout_width="48dp"
@@ -42,5 +45,6 @@
         android:layout_margin="16dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/close_legend"
-        android:src="@drawable/ic_close" />
+        android:src="@drawable/ic_close"
+        app:tint="@android:color/white" />
 </FrameLayout>

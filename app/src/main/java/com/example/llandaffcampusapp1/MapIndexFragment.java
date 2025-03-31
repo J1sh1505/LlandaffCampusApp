@@ -1,5 +1,6 @@
 package com.example.llandaffcampusapp1;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *fragment showing index of map icons + descriptions
@@ -33,7 +34,7 @@ public class MapIndexFragment extends Fragment {
 
         //init close button
         view.findViewById(R.id.btnClose).setOnClickListener(v -> {
-            //on click, go back to map frag
+            //on click, go back to map fragment
             requireActivity().onBackPressed();
         });
         
@@ -41,37 +42,38 @@ public class MapIndexFragment extends Fragment {
         TableLayout legendTable = view.findViewById(R.id.legend_table);
 
         //def map icons and descriptions
-        //LinkedHashMap maintains insert order
-        Map<String, IconInfo> mapIcons = new LinkedHashMap<>();
-        mapIcons.put("information", new IconInfo(R.drawable.ic_inf_desk, "Information Desk"));
-        mapIcons.put("library", new IconInfo(R.drawable.ic_library2, "Library"));
-        mapIcons.put("stairs", new IconInfo(R.drawable.ic_stairs, "Stairs"));
-        mapIcons.put("food", new IconInfo(R.drawable.ic_food, "Food Court/Restaurant"));
-        mapIcons.put("computer", new IconInfo(R.drawable.ic_computer, "Computer Lab"));
-        mapIcons.put("toilet", new IconInfo(R.drawable.ic_toilet, "Restroom/Toilet"));
-        mapIcons.put("accessible", new IconInfo(R.drawable.ic_accessible, "Accessible Facilities"));
-        mapIcons.put("coffee", new IconInfo(R.drawable.ic_coffee, "Coffee Shop"));
-        mapIcons.put("table", new IconInfo(R.drawable.ic_tables, "Study Tables"));
-        mapIcons.put("elevator", new IconInfo(R.drawable.ic_elevator, "Elevator"));
-        mapIcons.put("gym", new IconInfo(R.drawable.ic_gym, "Gym/Fitness Center"));
-        mapIcons.put("it", new IconInfo(R.drawable.ic_it, "IT Support"));
-        mapIcons.put("parking", new IconInfo(R.drawable.ic_parking, "Parking"));
-        mapIcons.put("lecture", new IconInfo(R.drawable.ic_lecture, "Lecture Hall"));
+        List<IconInfo> mapIcons = new ArrayList<>();
+        mapIcons.add(new IconInfo(R.drawable.ic_inf_desk, R.string.legend_info_desk));
+        mapIcons.add(new IconInfo(R.drawable.ic_library2, R.string.legend_library));
+        mapIcons.add(new IconInfo(R.drawable.ic_stairs, R.string.legend_stairs));
+        mapIcons.add(new IconInfo(R.drawable.ic_food, R.string.legend_food));
+        mapIcons.add(new IconInfo(R.drawable.ic_computer, R.string.legend_computer));
+        mapIcons.add(new IconInfo(R.drawable.ic_toilet, R.string.legend_toilet));
+        mapIcons.add(new IconInfo(R.drawable.ic_accessible, R.string.legend_accessible));
+        mapIcons.add(new IconInfo(R.drawable.ic_coffee, R.string.legend_coffee));
+        mapIcons.add(new IconInfo(R.drawable.ic_tables, R.string.legend_tables));
+        mapIcons.add(new IconInfo(R.drawable.ic_elevator, R.string.legend_elevator));
+        mapIcons.add(new IconInfo(R.drawable.ic_gym, R.string.legend_gym));
+        mapIcons.add(new IconInfo(R.drawable.ic_it, R.string.legend_it));
+        mapIcons.add(new IconInfo(R.drawable.ic_parking, R.string.legend_parking));
+        mapIcons.add(new IconInfo(R.drawable.ic_lecture, R.string.legend_lecture));
 
         //add icons to table
-        for (Map.Entry<String, IconInfo> entry : mapIcons.entrySet()) {
-            IconInfo iconInfo = entry.getValue();
-            
-            //create new row
+        for (IconInfo iconInfo : mapIcons) {
+            //make new row
             TableRow row = new TableRow(requireContext());
-            row.setPadding(0, 8, 0, 8);
+            row.setPadding(0, 12, 0, 12);
             
-            //create icons with size of 35dp
+            //create icons with size of 40dp
             ImageView iconView = new ImageView(requireContext());
             iconView.setImageResource(iconInfo.iconResId);
-            
-            //convert 35dp to pixels
-            int iconSizeInDp = 35;
+
+            //set icon colour to off white for better visibility
+            iconView.setColorFilter(Color.parseColor("#F5F5F5"), android.graphics.PorterDuff.Mode.SRC_IN);
+
+
+            //convert 40dp to pixels
+            int iconSizeInDp = 40;
             float scale = getResources().getDisplayMetrics().density;
             int iconSizeInPx = (int) (iconSizeInDp * scale + 0.5f);
             
@@ -81,13 +83,14 @@ public class MapIndexFragment extends Fragment {
             iconParams.setMargins(0, 0, 32, 0);
             iconView.setLayoutParams(iconParams);
             
-            //without this icons scale wrong when set to 35dp
+            //w/o this icons scale wrong when set to specific dp
             iconView.setScaleType(ImageView.ScaleType.FIT_CENTER);
             
-            //add & conf description text
+            //add & config description text
             TextView descText = new TextView(requireContext());
-            descText.setText(iconInfo.description);
+            descText.setText(iconInfo.descriptionResId);
             descText.setTextSize(16);
+            descText.setTextColor(Color.WHITE);
             
             //add text and icon to row
             row.addView(iconView);
@@ -95,6 +98,18 @@ public class MapIndexFragment extends Fragment {
             
             //add row to table
             legendTable.addView(row);
+            
+            //add dividers between rows
+            if (mapIcons.indexOf(iconInfo) < mapIcons.size() - 1) {
+                View divider = new View(requireContext());
+                TableLayout.LayoutParams dividerParams = new TableLayout.LayoutParams(
+                        TableLayout.LayoutParams.MATCH_PARENT, 
+                        1); //1px height
+                dividerParams.setMargins(0, 8, 0, 8);
+                divider.setLayoutParams(dividerParams);
+                divider.setBackgroundColor(Color.parseColor("#4DFFFFFF")); // Semi-transparent white
+                legendTable.addView(divider);
+            }
         }
     }
 
@@ -103,11 +118,11 @@ public class MapIndexFragment extends Fragment {
      */
     private static class IconInfo {
         final int iconResId;
-        final String description;
+        final int descriptionResId;
 
-        IconInfo(int iconResId, String description) {
+        IconInfo(int iconResId, int descriptionResId) {
             this.iconResId = iconResId;
-            this.description = description;
+            this.descriptionResId = descriptionResId;
         }
     }
 }
