@@ -26,7 +26,16 @@
         android:id="@+id/mapFragment"
         android:name="com.example.llandaffcampusapp1.MapFragment"
         android:label="Map"
-        tools:layout="@layout/fragment_map" />
+        tools:layout="@layout/fragment_map">
+        <action
+            android:id="@+id/action_mapFragment_to_mapIndexFragment"
+            app:destination="@id/mapIndexFragment" />
+    </fragment>
 
+    <fragment
+        android:id="@+id/mapIndexFragment"
+        android:name="com.example.llandaffcampusapp1.MapIndexFragment"
+        android:label="Map Legend"
+        tools:layout="@layout/fragment_map_index" />
 
 </navigation>

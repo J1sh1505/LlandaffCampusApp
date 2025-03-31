@@ -104,10 +104,17 @@ public class MapFragment extends Fragment {
         Button btnGroundFloor = view.findViewById(R.id.btnGroundFloor);
         Button btnFirstFloor = view.findViewById(R.id.btnFirstFloor);
         Button btnSecondFloor = view.findViewById(R.id.btnSecondFloor);
+        Button btnLegend = view.findViewById(R.id.btnLegend);
 
         btnGroundFloor.setOnClickListener(v -> loadFloorData("0"));
         btnFirstFloor.setOnClickListener(v -> loadFloorData("1"));
         btnSecondFloor.setOnClickListener(v -> loadFloorData("2"));
+        
+        //init Legend btn, nav to Legend/index
+        btnLegend.setOnClickListener(v -> {
+            androidx.navigation.Navigation.findNavController(view)
+                .navigate(R.id.action_mapFragment_to_mapIndexFragment);
+        });
 
         // Loads ground floor by default
         loadFloorData("0");
@@ -285,23 +292,35 @@ public class MapFragment extends Fragment {
 
         switch (iconType) {
             case "information":
-            case "inf_desk":
+            case "info":
                 return R.drawable.ic_inf_desk;
             case "library":
                 return R.drawable.ic_library2;
+            case "stairs":
+                return R.drawable.ic_stairs;
             case "food":
                 return R.drawable.ic_food;
+            case "computer":
+                return R.drawable.ic_computer;
             case "toilet":
             case "restroom":
                 return R.drawable.ic_toilet;
+            case "accessible":
+                return R.drawable.ic_accessible;
+            case "coffee":
+                return R.drawable.ic_coffee;
+            case "table":
+                return R.drawable.ic_tables;
             case "elevator":
-            case "lift":
+                return R.drawable.ic_elevator;
             case "gym":
                 return R.drawable.ic_gym;
             case "it":
                 return R.drawable.ic_it;
             case "parking":
                 return R.drawable.ic_parking;
+            case "lecture":
+                return R.drawable.ic_lecture;
             default:
                 return 0; //not found
         }
