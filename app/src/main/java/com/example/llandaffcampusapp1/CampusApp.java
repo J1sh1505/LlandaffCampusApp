@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-
 import java.util.Locale;
 
 public class CampusApp extends Application {
@@ -17,49 +16,70 @@ public class CampusApp extends Application {
     private static final String TEXT_SIZE_LARGE = "large";
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-        
-        // Set the user agent to your app's package name or another unique identifier.
-        org.osmdroid.config.Configuration.getInstance().setUserAgentValue(getPackageName());
-        
-        // Apply saved settings
-        applyAppSettings();
-    }
+    protected void attachBaseContext(Context base) {
+        //apply settings before app context is created
+        SharedPreferences preferences = base.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
 
-    private void applyAppSettings() {
-        SharedPreferences preferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        
-        // Apply language setting
+        //get saved settings
         String savedLanguage = preferences.getString(PREF_LANGUAGE, LANG_ENGLISH);
-        setAppLanguage(savedLanguage);
-        
-        // Apply text size setting
         String savedTextSize = preferences.getString(PREF_TEXT_SIZE, TEXT_SIZE_NORMAL);
-        applyTextSize(savedTextSize);
+
+        //apply settings to context
+        Context updatedContext = updateBaseContextSettings(base, savedLanguage, savedTextSize);
+        
+        super.attachBaseContext(updatedContext);
     }
 
-    private void setAppLanguage(String languageCode) {
+    private Context updateBaseContextSettings(Context context, String languageCode, String textSize) {
+        //create locale from language code
         Locale locale = new Locale(languageCode);
         Locale.setDefault(locale);
 
-        Resources resources = getResources();
-        Configuration config = resources.getConfiguration();
-        config.setLocale(locale);
-        
-        resources.updateConfiguration(config, resources.getDisplayMetrics());
+        //create config
+        Configuration configuration = new Configuration(context.getResources().getConfiguration());
+        configuration.setLocale(locale);
+
+        //apply text size
+        if (TEXT_SIZE_LARGE.equals(textSize)) {
+            configuration.fontScale = 1.3f;
+        } else {
+            configuration.fontScale = 1.0f;
+        }
+
+        //apply config to context
+        return context.createConfigurationContext(configuration);
+
+
     }
 
-    private void applyTextSize(String textSize) {
-        // Get current configuration
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        
+        org.osmdroid.config.Configuration.getInstance().setUserAgentValue(getPackageName());
+    }
+
+    public void applyAppSettings() {
+        SharedPreferences preferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        
+        //apply language setting
+        String savedLanguage = preferences.getString(PREF_LANGUAGE, LANG_ENGLISH);
+        String savedTextSize = preferences.getString(PREF_TEXT_SIZE, TEXT_SIZE_NORMAL);
+
+        //apply settings and update application context
         Resources resources = getResources();
         Configuration config = resources.getConfiguration();
 
-        // Apply text size scale
-        if (TEXT_SIZE_LARGE.equals(textSize)) {
-            config.fontScale = 1.3f; // Larger text
+        //set locale
+        Locale locale = new Locale(savedLanguage);
+        Locale.setDefault(locale);
+        config.setLocale(locale);
+
+        //set font scale
+        if (TEXT_SIZE_LARGE.equals(savedTextSize)) {
+            config.fontScale = 1.3f;
         } else {
-            config.fontScale = 1.0f; // Normal text size
+            config.fontScale = 1.0f;
         }
 
         resources.updateConfiguration(config, resources.getDisplayMetrics());

@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -23,9 +22,6 @@ public class SettingsFragment extends Fragment {
     private SharedPreferences preferences;
     private RadioGroup languageRadioGroup;
     private RadioGroup textSizeRadioGroup;
-    private Button resetButton;
-    private TextView languageTitle;
-    private TextView textResizingTitle;
 
     private static final String PREF_NAME = "LlandaffCampusSettings";
     private static final String PREF_LANGUAGE = "language";
@@ -50,9 +46,9 @@ public class SettingsFragment extends Fragment {
         //init views
         languageRadioGroup = view.findViewById(R.id.language_radio_group);
         textSizeRadioGroup = view.findViewById(R.id.text_size_radio_group);
-        resetButton = view.findViewById(R.id.reset_button);
-        languageTitle = view.findViewById(R.id.language_title);
-        textResizingTitle = view.findViewById(R.id.text_resizing_title);
+        Button resetButton = view.findViewById(R.id.reset_button);
+        TextView languageTitle = view.findViewById(R.id.language_title);
+        TextView textResizingTitle = view.findViewById(R.id.text_resizing_title);
 
         //set load state based on preferences
         setupInitialState();
@@ -149,6 +145,11 @@ public class SettingsFragment extends Fragment {
         config.setLocale(locale);
         
         resources.updateConfiguration(config, resources.getDisplayMetrics());
+        
+        //apply at app level, ensures settings persists
+        if (getActivity() != null && getActivity().getApplication() instanceof CampusApp) {
+            ((CampusApp) getActivity().getApplication()).applyAppSettings();
+        }
     }
 
     private void applyTextSize(String textSize) {
@@ -164,6 +165,11 @@ public class SettingsFragment extends Fragment {
         }
 
         resources.updateConfiguration(config, resources.getDisplayMetrics());
+        
+        //apply at application level, ensures it persists
+        if (getActivity() != null && getActivity().getApplication() instanceof CampusApp) {
+            ((CampusApp) getActivity().getApplication()).applyAppSettings();
+        }
     }
 
     @Override
