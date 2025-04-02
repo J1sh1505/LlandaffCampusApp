@@ -1,5 +1,9 @@
 package com.example.llandaffcampusapp;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -15,6 +19,9 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //ensure settings are applied
+        ((CampusApp) getApplicationContext()).applyAppSettings();
 
         // Find BottomNavigationView
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
