@@ -31,4 +31,14 @@
     <string name="legend_it">IT Support</string>
     <string name="legend_parking">Parking</string>
     <string name="legend_lecture">Lecture Hall</string>
+    
+    <string name="login_subtitle">Sign in to sync your preferences across devices</string>
+    <string name="skip_login">Skip Login</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="signing_in">Signing in…</string>
+    <string name="login_success">Login successful</string>
+    <string name="login_failed">Login failed. Please try again.</string>
+    <string name="logout">Log out</string>
+    <string name="account_section_title">Account</string>
+    <string name="guest_user">Guest User</string>
 </resources>

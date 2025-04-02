@@ -1,13 +1,14 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
 }
 
 android {
-    namespace 'com.example.llandaffcampusapp1'  // Add the namespace here
-    compileSdk 34
+    namespace 'com.example.llandaffcampusapp'  // Add the namespace here
+    compileSdk 35
 
     defaultConfig {
-        applicationId "com.example.llandaffcampusapp1"
+        applicationId "com.example.llandaffcampusapp"
         minSdk 26
         targetSdk 34
         versionCode 1
@@ -34,24 +35,33 @@ android {
 
 dependencies {
     // AndroidX core libraries
-    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'com.google.android.material:material:1.7.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation libs.core.ktx
+    implementation libs.appcompat.v151
+    implementation libs.material.v170
+    implementation libs.constraintlayout.v214
 
-
-
-
+    // Firebase dependencies
+    implementation platform(libs.firebase.bom)
+    implementation libs.firebase.auth
+    implementation libs.firebase.firestore
+    implementation libs.play.services.auth
 
     // Navigation component dependencies for navigation between fragments
-    implementation "androidx.navigation:navigation-fragment-ktx:2.5.1"
-    implementation "androidx.navigation:navigation-ui-ktx:2.5.1"
+    implementation libs.navigation.fragment.ktx
+    implementation libs.navigation.ui.ktx
 
     // Testing dependencies
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    testImplementation libs.junit
+    androidTestImplementation libs.junit.v114
+    androidTestImplementation libs.espresso.core.v340
 
     // Open Street Map stuff
-    implementation 'org.osmdroid:osmdroid-android:6.1.15'
+    implementation libs.osmdroid.android
+
+    //pfp stuff
+    implementation libs.circleimageview
+    implementation libs.glide
+
+
+
 }
