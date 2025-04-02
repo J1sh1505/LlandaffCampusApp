@@ -126,6 +126,7 @@ public class CampusApp extends Application {
         config.setLocale(locale);
         
         resources.updateConfiguration(config, resources.getDisplayMetrics());
+        createConfigurationContext(config);
     }
 
     private void applyTextSize(String textSize) {
@@ -141,5 +142,6 @@ public class CampusApp extends Application {
         }
 
         resources.updateConfiguration(config, resources.getDisplayMetrics());
+        createConfigurationContext(config);
     }
 }

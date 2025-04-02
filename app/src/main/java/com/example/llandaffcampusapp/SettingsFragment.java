@@ -332,6 +332,7 @@ public class SettingsFragment extends Fragment {
         config.setLocale(locale);
         
         resources.updateConfiguration(config, resources.getDisplayMetrics());
+        requireActivity().createConfigurationContext(config);
     }
 
     private void applyTextSize(String textSize) {
@@ -347,6 +348,7 @@ public class SettingsFragment extends Fragment {
         }
 
         resources.updateConfiguration(config, resources.getDisplayMetrics());
+        requireActivity().createConfigurationContext(config);
     }
 
     @Override
