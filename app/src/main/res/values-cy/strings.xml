@@ -17,11 +17,13 @@
     <string name="explore">Archwilio</string>
     <string name="settings">Gosodiadau</string>
     <string name="map">Map</string>
-    
+    <string name ="virtual_tours">Teithiau Rhithwir</string>
+
+    <string name="book_an_induction">Archebu Sesiwn Gynefio</string>
     <string name="legend_info_desk">Desg Wybodaeth</string>
     <string name="legend_library">Llyfrgell</string>
     <string name="legend_stairs">Grisiau</string>
-    <string name="legend_food">Bwyty/Ffreutur</string>
+    <string name="legend_food">Ffreutur</string>
     <string name="legend_computer">Labordy Cyfrifiaduron</string>
     <string name="legend_toilet">Toiledau</string>
     <string name="legend_accessible">Cyfleusterau Hygyrch</string>
@@ -33,14 +35,23 @@
     <string name="legend_parking">Parcio</string>
     <string name="legend_lecture">Neuadd Ddarlithio</string>
     
-    <!-- Added missing login-related translations -->
     <string name="login_subtitle">Mewngofnodwch i gydweddu eich dewisiadau ar draws dyfeisiau</string>
     <string name="skip_login">Hepgor Mewngofnodi</string>
     <string name="sign_in_with_google">Mewngofnodi gyda Google</string>
-    <string name="signing_in">Yn mewngofnodi...</string>
+    <string name="signing_in">Yn mewngofnodi…</string>
     <string name="login_success">Mewngofnodi\'n llwyddiannus</string>
     <string name="login_failed">Methwyd mewngofnodi. Ceisiwch eto.</string>
     <string name="logout">Allgofnodi</string>
     <string name="account_section_title">Cyfrif</string>
     <string name="guest_user">Defnyddiwr Gwestai</string>
+    <string name="cafeterias">Ffreuturuau</string>
+    <string name="lecturers">Darlithwyr</string>
+    <string name="gym">Campfa</string>
+    <string name="technology">Technoleg</string>
+    <string name="location_blocks">Blociau Campws</string>
+    <string name="events">Digwyddiadau</string>
+    <string name="meetings">Cyfarfodydd</string>
+    <string name="sign_in">Mewngofnodi</string>
+    <string name="llandaff_campus">Campws Llandaff</string>
+    <string name="lecture_halls">Neuaddau Darlith</string>
 </resources>
