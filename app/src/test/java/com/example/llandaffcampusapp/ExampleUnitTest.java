@@ -1,4 +1,4 @@
-package com.example.llandaffcampusapp1;
+package com.example.llandaffcampusapp;
 
 import org.junit.Test;
 

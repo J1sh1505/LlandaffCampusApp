@@ -1,21 +1,27 @@
-package com.example.llandaffcampusapp1;
+package com.example.llandaffcampusapp;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
+
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //ensure settings are applied
+        ((CampusApp) getApplicationContext()).applyAppSettings();
 
         // Find BottomNavigationView
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);

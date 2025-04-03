@@ -1,4 +1,4 @@
-package com.example.llandaffcampusapp1;
+package com.example.llandaffcampusapp;
 
 import android.graphics.Color;
 import android.os.Bundle;

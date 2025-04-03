@@ -7,6 +7,7 @@
     android:background="#303030">
 
     <!-- Image at the Top -->
+
     <ImageView
         android:id="@+id/top_image"
         android:layout_width="match_parent"
@@ -19,12 +20,27 @@
         app:layout_constraintHeight_percent="0.33" />
 
     <!-- Title -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/sign_in_button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent"
+        android:text="@string/sign_in"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/white"
+        app:strokeWidth="5dp" />
+
     <TextView
         android:id="@+id/title_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Llandaff Campus"
+        android:text="@string/llandaff_campus"
         android:textColor="@android:color/white"
         android:textSize="46sp"
         android:textStyle="bold"
@@ -94,10 +110,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="."
-                        android:textSize="24sp"
                         android:backgroundTint="@android:color/transparent"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/white"
+                        android:textSize="24sp" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
@@ -125,10 +140,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="Virtual Tours"
-                        android:textSize="24sp"
                         android:backgroundTint="@android:color/transparent"
-                        android:textColor="@android:color/white" />
+                        android:text="@string/virtual_tours"
+                        android:textColor="@android:color/white"
+                        android:textSize="24sp" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
@@ -156,10 +171,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="."
-                        android:textSize="24sp"
                         android:backgroundTint="@android:color/transparent"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/white"
+                        android:textSize="24sp" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 

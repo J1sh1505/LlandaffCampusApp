@@ -25,21 +25,30 @@
             android:id="@+id/btnGroundFloor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ground_floor" />
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="@string/ground_floor"
+            android:textSize="10sp" />
 
         <Button
             android:id="@+id/btnFirstFloor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
             android:text="@string/floor_1"
-            android:layout_marginStart="8dp" />
+            android:textSize="10sp" />
 
         <Button
             android:id="@+id/btnSecondFloor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
             android:text="@string/floor_2"
-            android:layout_marginStart="8dp" />
+            android:textSize="10sp" />
     </LinearLayout>
     
     <!--legend btn, btm right corner-->

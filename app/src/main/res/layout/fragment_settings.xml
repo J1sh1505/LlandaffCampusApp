@@ -20,6 +20,52 @@
             android:orientation="vertical"
             android:padding="24dp">
 
+            <TextView
+                android:id="@+id/account_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/account_section_title"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="16dp"
+                android:textSize="22sp" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/account_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                android:layout_marginBottom="24dp"
+                app:cardBackgroundColor="#424242">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profile_image"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="16dp"
+                        app:civ_border_width="2dp"
+                        app:civ_border_color="#FFFFFF" />
+
+
+
+                    <TextView
+                        android:id="@+id/user_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:padding="8dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
             <!-- Language Section -->
             <TextView
                 android:id="@+id/language_title"
@@ -124,6 +170,18 @@
                 android:layout_marginTop="24dp"
                 android:backgroundTint="@color/sky_blue"
                 android:text="@string/reset_button_text"
+                android:textColor="@android:color/white"
+                android:padding="12dp"
+                android:elevation="4dp" />
+
+            <!-- Logout Button -->
+            <Button
+                android:id="@+id/logout_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="#E53935"
+                android:text="@string/logout"
                 android:textColor="@android:color/white"
                 android:padding="12dp"
                 android:elevation="4dp" />

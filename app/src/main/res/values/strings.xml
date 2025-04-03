@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LlandaffCampusApp1</string>
+    <string name="app_name">LlandaffCampusApp</string>
     <string name="close_legend">Close legend</string>
     <string name="floor_1">Floor 1</string>
     <string name="floor_2">Floor 2</string>
@@ -16,6 +16,19 @@
     <string name="explore">Explore</string>
     <string name="settings">Settings</string>
     <string name="map">Map</string>
+    <string name="sign_in">Sign In</string>
+    <string name="llandaff_campus">Llandaff Campus</string>
+    <string name="lecture_halls">Lecture Halls</string>
+    <string name="cafeterias">Cafeterias</string>
+    <string name="lecturers">Lecturers</string>
+    <string name="gym">Gym</string>
+    <string name="technology">Technology</string>
+    <string name="location_blocks">Location Blocks</string>
+    <string name="events">Events</string>
+    <string name="meetings">Meetings</string>
+    <string name="book_an_induction">Book an Induction</string>
+    <string name="virtual_tours">Virtual Tours</string>"
+
     
     <string name="legend_info_desk">Information Desk</string>
     <string name="legend_library">Library</string>
@@ -31,4 +44,14 @@
     <string name="legend_it">IT Support</string>
     <string name="legend_parking">Parking</string>
     <string name="legend_lecture">Lecture Hall</string>
+    
+    <string name="login_subtitle">Sign in to sync your preferences across devices</string>
+    <string name="skip_login">Skip Login</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="signing_in">Signing in…</string>
+    <string name="login_success">Login successful</string>
+    <string name="login_failed">Login failed. Please try again.</string>
+    <string name="logout">Log out</string>
+    <string name="account_section_title">Account</string>
+    <string name="guest_user">Guest User</string>
 </resources>

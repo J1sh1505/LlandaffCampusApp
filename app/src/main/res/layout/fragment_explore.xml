@@ -11,15 +11,15 @@
         android:id="@+id/explore_page_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Llandaff Campus"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="@string/llandaff_campus"
+        android:textColor="@android:color/white"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="@android:color/white"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:gravity="center" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Scrollable Area for Museum List -->
     <ScrollView
@@ -57,19 +57,19 @@
                         android:id="@+id/lecture_halls_image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/lecture_halls"
-                        android:contentDescription="Lecture Halls"
-                        android:scaleType="centerCrop" />
+                        android:contentDescription="@string/lecture_halls"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/lecture_halls" />
                 </androidx.cardview.widget.CardView>
 
                 <Button
                     android:id="@+id/lecture_halls_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Lecture Halls"
+                    android:layout_marginTop="8dp"
                     android:backgroundTint="@android:color/transparent"
-                    android:textColor="@android:color/white"
-                    android:layout_marginTop="8dp" />
+                    android:text="@string/lecture_halls"
+                    android:textColor="@android:color/white" />
             </LinearLayout>
 
             <!-- Cafeterias -->
@@ -91,19 +91,19 @@
                         android:id="@+id/cafeterias_image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/cafeterias"
-                        android:contentDescription="Cafeterias"
-                        android:scaleType="centerCrop" />
+                        android:contentDescription="@string/cafeterias"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/cafeterias" />
                 </androidx.cardview.widget.CardView>
 
                 <Button
                     android:id="@+id/cafeterias_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cafeterias"
+                    android:layout_marginTop="8dp"
                     android:backgroundTint="@android:color/transparent"
-                    android:textColor="@android:color/white"
-                    android:layout_marginTop="8dp" />
+                    android:text="@string/cafeterias"
+                    android:textColor="@android:color/white" />
             </LinearLayout>
 
             <!-- Lecturers -->
@@ -125,19 +125,19 @@
                         android:id="@+id/lecturers_image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/lecturers"
-                        android:contentDescription="Lecturers"
-                        android:scaleType="centerCrop" />
+                        android:contentDescription="@string/lecturers"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/lecturers" />
                 </androidx.cardview.widget.CardView>
 
                 <Button
                     android:id="@+id/lecturers_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Lecturers"
+                    android:layout_marginTop="8dp"
                     android:backgroundTint="@android:color/transparent"
-                    android:textColor="@android:color/white"
-                    android:layout_marginTop="8dp" />
+                    android:text="@string/lecturers"
+                    android:textColor="@android:color/white" />
             </LinearLayout>
 
             <!-- Gym -->
@@ -159,19 +159,19 @@
                         android:id="@+id/gym_image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/gym"
-                        android:contentDescription="Gym"
-                        android:scaleType="centerCrop" />
+                        android:contentDescription="@string/gym"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/gym" />
                 </androidx.cardview.widget.CardView>
 
                 <Button
                     android:id="@+id/gym_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Gym"
+                    android:layout_marginTop="8dp"
                     android:backgroundTint="@android:color/transparent"
-                    android:textColor="@android:color/white"
-                    android:layout_marginTop="8dp" />
+                    android:text="@string/gym"
+                    android:textColor="@android:color/white" />
             </LinearLayout>
 
             <!-- Technology -->
@@ -193,19 +193,19 @@
                         android:id="@+id/technology_image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/technology"
-                        android:contentDescription="Technology"
-                        android:scaleType="centerCrop" />
+                        android:contentDescription="@string/technology"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/technology" />
                 </androidx.cardview.widget.CardView>
 
                 <Button
                     android:id="@+id/technology_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Technology"
+                    android:layout_marginTop="8dp"
                     android:backgroundTint="@android:color/transparent"
-                    android:textColor="@android:color/white"
-                    android:layout_marginTop="8dp" />
+                    android:text="@string/technology"
+                    android:textColor="@android:color/white" />
             </LinearLayout>
 
             <!-- Location Blocks -->
@@ -227,19 +227,19 @@
                         android:id="@+id/location_blocks_image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/location_blocks"
-                        android:contentDescription="Location Blocks"
-                        android:scaleType="centerCrop" />
+                        android:contentDescription="@string/location_blocks"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/location_blocks" />
                 </androidx.cardview.widget.CardView>
 
                 <Button
                     android:id="@+id/location_blocks_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Location Blocks"
+                    android:layout_marginTop="8dp"
                     android:backgroundTint="@android:color/transparent"
-                    android:textColor="@android:color/white"
-                    android:layout_marginTop="8dp" />
+                    android:text="@string/location_blocks"
+                    android:textColor="@android:color/white" />
             </LinearLayout>
 
             <!-- Events -->
@@ -261,19 +261,19 @@
                         android:id="@+id/events_image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/events"
-                        android:contentDescription="Events"
-                        android:scaleType="centerCrop" />
+                        android:contentDescription="@string/events"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/events" />
                 </androidx.cardview.widget.CardView>
 
                 <Button
                     android:id="@+id/events_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Events"
+                    android:layout_marginTop="8dp"
                     android:backgroundTint="@android:color/transparent"
-                    android:textColor="@android:color/white"
-                    android:layout_marginTop="8dp" />
+                    android:text="@string/events"
+                    android:textColor="@android:color/white" />
             </LinearLayout>
 
             <!-- Meetings -->
@@ -295,19 +295,19 @@
                         android:id="@+id/meetings_image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/meetings"
-                        android:contentDescription="Meetings"
-                        android:scaleType="centerCrop" />
+                        android:contentDescription="@string/meetings"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/meetings" />
                 </androidx.cardview.widget.CardView>
 
                 <Button
                     android:id="@+id/meetings_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Meetings"
+                    android:layout_marginTop="8dp"
                     android:backgroundTint="@android:color/transparent"
-                    android:textColor="@android:color/white"
-                    android:layout_marginTop="8dp" />
+                    android:text="@string/meetings"
+                    android:textColor="@android:color/white" />
             </LinearLayout>
 
             <!-- Book An Induction -->
@@ -329,19 +329,19 @@
                         android:id="@+id/book_induction_image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/inductions"
-                        android:contentDescription="Book An Induction"
-                        android:scaleType="centerCrop" />
+                        android:contentDescription="@string/book_an_induction"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/inductions" />
                 </androidx.cardview.widget.CardView>
 
                 <Button
                     android:id="@+id/book_induction_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Book An Induction"
+                    android:layout_marginTop="8dp"
                     android:backgroundTint="@android:color/transparent"
-                    android:textColor="@android:color/white"
-                    android:layout_marginTop="8dp" />
+                    android:text="@string/book_an_induction"
+                    android:textColor="@android:color/white" />
             </LinearLayout>
 
         </LinearLayout>
