@@ -42,11 +42,8 @@ public class SettingsFragment extends Fragment {
     private SharedPreferences preferences;
     private RadioGroup languageRadioGroup;
     private RadioGroup textSizeRadioGroup;
-    private Button resetButton;
     private Button logoutButton;
-    private TextView languageTitle;
-    private TextView textResizingTitle;
-    private TextView accountTitle;
+
     private TextView userEmailText;
     private CardView accountCard;
 
@@ -89,7 +86,7 @@ public class SettingsFragment extends Fragment {
             try {
                 // Try to use the default_web_client_id from strings.xml if it exists
                 String webClientId = getString(R.string.default_web_client_id);
-                if (webClientId != null && !webClientId.isEmpty()) {
+                if (!webClientId.isEmpty()) {
                     gsoBuilder.requestIdToken(webClientId);
                     Log.d(TAG, "Using web client ID from strings.xml: " + webClientId);
                 }
@@ -106,11 +103,8 @@ public class SettingsFragment extends Fragment {
         //init views
         languageRadioGroup = view.findViewById(R.id.language_radio_group);
         textSizeRadioGroup = view.findViewById(R.id.text_size_radio_group);
-        resetButton = view.findViewById(R.id.reset_button);
+        Button resetButton = view.findViewById(R.id.reset_button);
         logoutButton = view.findViewById(R.id.logout_button);
-        languageTitle = view.findViewById(R.id.language_title);
-        textResizingTitle = view.findViewById(R.id.text_resizing_title);
-        accountTitle = view.findViewById(R.id.account_title);
         userEmailText = view.findViewById(R.id.user_email);
         accountCard = view.findViewById(R.id.account_card);
 
@@ -324,31 +318,38 @@ public class SettingsFragment extends Fragment {
     }
 
     private void setAppLanguage(String languageCode) {
-        Locale locale = new Locale(languageCode);
-        Locale.setDefault(locale);
-
-        Resources resources = requireActivity().getResources();
-        Configuration config = resources.getConfiguration();
-        config.setLocale(locale);
+    Locale locale = new Locale(languageCode);
+    Locale.setDefault(locale);
         
-        resources.updateConfiguration(config, resources.getDisplayMetrics());
-        requireActivity().createConfigurationContext(config);
+    // Get current configuration and create a new one with the updated locale
+    Configuration config = new Configuration(requireActivity().getResources().getConfiguration());
+    config.setLocale(locale);
+    
+    // Create a new context with the updated configuration
+    Context context = requireActivity().createConfigurationContext(config);
+        
+        // Update the application context with the new configuration
+        Resources resources = context.getResources();
+        requireActivity().getResources().updateConfiguration(config, resources.getDisplayMetrics());
     }
 
     private void applyTextSize(String textSize) {
-        //get current config
-        Resources resources = requireActivity().getResources();
-        Configuration config = resources.getConfiguration();
-
-        //apply text size
+        // Get current configuration
+        Configuration config = new Configuration(requireActivity().getResources().getConfiguration());
+        
+        // Apply text size
         if (TEXT_SIZE_LARGE.equals(textSize)) {
-            config.fontScale = 1.3f; //LARGER text
+            config.fontScale = 1.3f; // LARGER text
         } else {
-            config.fontScale = 1.0f; //normal text size
+            config.fontScale = 1.0f; // Normal text size
         }
-
-        resources.updateConfiguration(config, resources.getDisplayMetrics());
-        requireActivity().createConfigurationContext(config);
+        
+        // Create a new context with the updated configuration
+        Context context = requireActivity().createConfigurationContext(config);
+        
+        // Update the application context with the new configuration
+        Resources resources = context.getResources();
+        requireActivity().getResources().updateConfiguration(config, resources.getDisplayMetrics());
     }
 
     @Override

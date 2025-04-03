@@ -58,7 +58,7 @@ public class CampusApp extends Application {
         }
     }
 
-    private void applyAppSettings() {
+    void applyAppSettings() {
         SharedPreferences preferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         
         //apply language setting
