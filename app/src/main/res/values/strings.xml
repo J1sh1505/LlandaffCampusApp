@@ -29,7 +29,7 @@
     <string name="book_an_induction">Book an Induction</string>
     <string name="virtual_tours">Virtual Tours</string>"
 
-    
+
     <string name="legend_info_desk">Information Desk</string>
     <string name="legend_library">Library</string>
     <string name="legend_stairs">Stairs</string>
@@ -44,7 +44,7 @@
     <string name="legend_it">IT Support</string>
     <string name="legend_parking">Parking</string>
     <string name="legend_lecture">Lecture Hall</string>
-    
+
     <string name="login_subtitle">Sign in to sync your preferences across devices</string>
     <string name="skip_login">Skip Login</string>
     <string name="sign_in_with_google">Sign in with Google</string>
@@ -54,4 +54,6 @@
     <string name="logout">Log out</string>
     <string name="account_section_title">Account</string>
     <string name="guest_user">Guest User</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

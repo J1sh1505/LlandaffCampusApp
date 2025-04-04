@@ -67,8 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:backgroundTint="@android:color/transparent"
-                    android:text="@string/lecture_halls"
+                    android:text="Explore Lecture Halls"
                     android:textColor="@android:color/white" />
             </LinearLayout>
 
@@ -101,8 +100,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:backgroundTint="@android:color/transparent"
-                    android:text="@string/cafeterias"
+                    android:text="Explore Cafeterias"
                     android:textColor="@android:color/white" />
             </LinearLayout>
 
@@ -135,8 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:backgroundTint="@android:color/transparent"
-                    android:text="@string/lecturers"
+                    android:text="Explore lecturers"
                     android:textColor="@android:color/white" />
             </LinearLayout>
 
@@ -169,8 +166,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:backgroundTint="@android:color/transparent"
-                    android:text="@string/gym"
+                    android:text="Explore Gym"
                     android:textColor="@android:color/white" />
             </LinearLayout>
 
@@ -203,8 +199,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:backgroundTint="@android:color/transparent"
-                    android:text="@string/technology"
+                    android:text="Explore Technology"
                     android:textColor="@android:color/white" />
             </LinearLayout>
 
@@ -237,8 +232,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:backgroundTint="@android:color/transparent"
-                    android:text="@string/location_blocks"
+                    android:text="Explore Location Blocks"
                     android:textColor="@android:color/white" />
             </LinearLayout>
 
@@ -271,8 +265,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:backgroundTint="@android:color/transparent"
-                    android:text="@string/events"
+                    android:text="Explore Events"
                     android:textColor="@android:color/white" />
             </LinearLayout>
 
@@ -305,8 +298,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:backgroundTint="@android:color/transparent"
-                    android:text="@string/meetings"
+                    android:text="Explore Meetings"
                     android:textColor="@android:color/white" />
             </LinearLayout>
 
@@ -339,7 +331,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:backgroundTint="@android:color/transparent"
                     android:text="@string/book_an_induction"
                     android:textColor="@android:color/white" />
             </LinearLayout>
