@@ -47,8 +47,6 @@ captures/
 .externalNativeBuild
 .cxx/
 
-google-services.json
-
 vcs.xml
 
 .DS_Store

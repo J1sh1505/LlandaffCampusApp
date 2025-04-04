@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "840241541650",
+    "project_id": "llandaff-app-edbcd",
+    "storage_bucket": "llandaff-app-edbcd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:840241541650:android:c9ef8c68f77d3b30951ecb",
+        "android_client_info": {
+          "package_name": "com.example.llandaffcampusapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "840241541650-b348blopiivto2bh6cuge5kn24sc3e8r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.llandaffcampusapp",
+            "certificate_hash": "3674eff70f00c2310939475e8600afebd29fd6df"
+          }
+        },
+        {
+          "client_id": "840241541650-9jf46mfm4lb39v5957so8aln7ujbefuv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAq2rKLKrzr19qVUpteGNTAhtBNG3BREz4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "840241541650-9jf46mfm4lb39v5957so8aln7ujbefuv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

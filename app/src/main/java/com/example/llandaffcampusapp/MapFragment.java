@@ -232,7 +232,7 @@ public class MapFragment extends Fragment {
         try {
             JSONArray features = geoJson.getJSONArray("features");
             double currentZoom = mapView.getZoomLevelDouble();
-            boolean showDetails = currentZoom >= 21;  // Only show rooms at zoom level 22 or more
+            boolean showDetails = currentZoom >= 20.5;  // Only show rooms at zoom level 22 or more
 
             for (int i = 0; i < features.length(); i++) {
                 JSONObject feature = features.getJSONObject(i);
