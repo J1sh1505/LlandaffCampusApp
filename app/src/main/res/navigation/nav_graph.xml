@@ -4,6 +4,90 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@id/homeFragment">
 
+    <action
+        android:id="@+id/action_exploreFragment_to_lectureHallsFragment"
+        app:destination="@id/lectureHallsFragment" />
+
+    <action
+        android:id="@+id/action_exploreFragment_to_cafeteriaFragment"
+        app:destination="@id/cafeteriasFragment" />
+
+    <action
+        android:id="@+id/action_exploreFragment_to_lecturersFragment"
+        app:destination="@id/lecturersFragment" />
+
+    <action
+        android:id="@+id/action_exploreFragment_to_gymFragment"
+        app:destination="@id/gymFragment"/>
+
+    <action
+        android:id="@+id/action_exploreFragment_to_technologyFragment"
+        app:destination="@id/technologyFragment"/>
+
+    <action
+        android:id="@+id/action_exploreFragment_to_locationBlocksFragment"
+        app:destination="@id/locationBlocksFragment"/>
+
+    <action
+        android:id="@+id/action_exploreFragment_to_eventsFragment"
+        app:destination="@id/eventsFragment"/>
+
+    <action
+        android:id="@+id/action_exploreFragment_to_meetingsFragment"
+        app:destination="@+id/meetingsFragment"/>
+
+    <action
+        android:id="@+id/action_exploreFragment_to_bookInductionFragment"
+        app:destination="@+id/bookInductionFragment"/>
+
+    <!-- Fragments -->
+    <fragment
+        android:id="@+id/bookInductionFragment"
+        android:name="com.example.llandaffcampusapp.BookInductionFragment"
+        android:label="Book Induction"/>
+
+    <fragment
+        android:id="@+id/meetingsFragment"
+        android:name="com.example.llandaffcampusapp.MeetingsFragment"
+        android:label="Meetings"/>
+
+    <fragment
+        android:id="@+id/eventsFragment"
+        android:name="com.example.llandaffcampusapp.EventsFragment"
+        android:label="Events"/>
+
+    <fragment
+        android:id="@+id/locationBlocksFragment"
+        android:name="com.example.llandaffcampusapp.LocationBlocksFragment"
+        android:label="Location Blocks"/>
+
+    <fragment
+        android:id="@+id/technologyFragment"
+        android:name="com.example.llandaffcampusapp.TechnologyFragment"
+        android:label="Technology"/>
+
+    <fragment
+        android:id="@+id/gymFragment"
+        android:name="com.example.llandaffcampusapp.GymFragment"
+        android:label="Gym"/>
+
+    <fragment
+        android:id="@+id/lecturersFragment"
+        android:name="com.example.llandaffcampusapp.LecturersFragment"
+        android:label="Lecturers"/>
+
+    <fragment
+        android:id="@+id/lectureHallsFragment"
+        android:name="com.example.llandaffcampusapp.LectureHallsFragment"
+        android:label="Lecture Halls">
+    </fragment>
+
+    <fragment
+        android:id="@+id/cafeteriasFragment"
+        android:name="com.example.llandaffcampusapp.CafeteriasFragment"
+        android:label="Cafeterias">
+    </fragment>
+
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.llandaffcampusapp.HomeFragment"
