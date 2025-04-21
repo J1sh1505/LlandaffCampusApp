@@ -330,11 +330,14 @@ public class MapFragment extends Fragment {
             // Define zoom thresholds for different levels of detail
             boolean showDetails = currentZoom >= 20.5;  // Only show points/icons at this zoom level
             boolean showRooms = currentZoom >= 19.5;    // Only show rooms at this zoom level or higher
+            boolean showStairs = currentZoom >= 19.1;
 
             // Create lists to store features for ordered processing
             List<JSONObject> buildingFeatures = new ArrayList<>();
             List<JSONObject> roomFeatures = new ArrayList<>();
             List<JSONObject> roadFeatures = new ArrayList<>();
+            List<JSONObject> parkingIconFeatures = new ArrayList<>(); // List for parking icons
+            List<JSONObject> stairsIconFeatures = new ArrayList<>(); // List for stairs icons
             List<JSONObject> otherFeatures = new ArrayList<>();
             
             // Debug - print number of features
@@ -360,6 +363,22 @@ public class MapFragment extends Fragment {
                         double lat = coords.getDouble(1);
                         addBuildingLabel(new GeoPoint(lat, lon), buildingLetter);
                     }
+                    continue;
+                }
+
+                // Save parking icon points to a separate list
+                if ("Point".equals(type) && 
+                    properties != null && 
+                    "parking".equals(properties.optString("icon", ""))) {
+                    parkingIconFeatures.add(feature);
+                    continue;
+                }
+                
+                // Save stairs icon points to a separate list
+                if ("Point".equals(type) && 
+                    properties != null && 
+                    "stairs".equals(properties.optString("icon", ""))) {
+                    stairsIconFeatures.add(feature);
                     continue;
                 }
 
@@ -389,6 +408,8 @@ public class MapFragment extends Fragment {
             System.out.println("Building features: " + buildingFeatures.size());
             System.out.println("Room features: " + roomFeatures.size());
             System.out.println("Road features: " + roadFeatures.size());
+            System.out.println("Parking icon features: " + parkingIconFeatures.size());
+            System.out.println("Stairs icon features: " + stairsIconFeatures.size());
             System.out.println("Other features: " + otherFeatures.size());
             
             // Process features in order of layering (bottom to top)
@@ -449,7 +470,36 @@ public class MapFragment extends Fragment {
                 System.out.println("Not drawing rooms at zoom level: " + currentZoom);
             }
             
-            // 4. Process road features last (top layer)
+            // 4. Process parking icons (always visible at all zoom levels)
+            for (JSONObject parkingFeature : parkingIconFeatures) {
+                JSONObject geometry = parkingFeature.getJSONObject("geometry");
+                JSONObject properties = parkingFeature.optJSONObject("properties");
+                JSONArray coordinates = geometry.getJSONArray("coordinates");
+                
+                // Draw the parking symbol
+                double lon = coordinates.getDouble(0);
+                double lat = coordinates.getDouble(1);
+                addParkingSymbol(new GeoPoint(lat, lon));
+            }
+            
+            // 5. Process stairs icons (always visible at all zoom levels)
+            if (showStairs && stairsIconFeatures.size() > 0) {
+                System.out.println("Drawing " + stairsIconFeatures.size() + " stairs icons at zoom level: " + currentZoom);
+                for (JSONObject stairsFeature : stairsIconFeatures) {
+                    JSONObject geometry = stairsFeature.getJSONObject("geometry");
+                    JSONObject properties = stairsFeature.optJSONObject("properties");
+                    JSONArray coordinates = geometry.getJSONArray("coordinates");
+                    
+                    // Draw the stairs icon
+                    double lon = coordinates.getDouble(0);
+                    double lat = coordinates.getDouble(1);
+                    addStairsIcon(new GeoPoint(lat, lon));
+                }
+            } else {
+                System.out.println("Not drawing stairs at zoom level: " + currentZoom);
+            }
+
+            // 6. Process road features last (top layer)
             for (JSONObject roadFeature : roadFeatures) {
                 JSONObject geometry = roadFeature.getJSONObject("geometry");
                 JSONObject properties = roadFeature.optJSONObject("properties");
@@ -637,6 +687,20 @@ public class MapFragment extends Fragment {
             double lat = coords.getDouble(1);
             GeoPoint point = new GeoPoint(lat, lon);
 
+            // Check if this is a parking icon node
+            if (properties != null && "parking".equals(properties.optString("icon", ""))) {
+                // Add blue P marker at this location for parking
+                addParkingSymbol(point);
+                return; // Skip other processing for this point
+            }
+
+            // Check if this is a stairs icon node
+            if (properties != null && "stairs".equals(properties.optString("icon", ""))) {
+                // Add blue P marker at this location for parking
+                addStairsIcon(point);
+                return; // Skip other processing for this point
+            }
+            
             //check if icon specified in properties
             String iconType = properties != null ? properties.optString("icon_type", "") : "";
             int iconResource = getIconResource(iconType);
@@ -684,6 +748,43 @@ public class MapFragment extends Fragment {
             e.printStackTrace();
         }
     }
+    
+    /**
+     * Adds a blue "P" symbol at the specified point for parking
+     * Maybe use ic_parking icon instead
+     */
+    private void addParkingSymbol(GeoPoint center) {
+        if (center == null) return;
+        
+        // Get current zoom level to scale text size
+        double zoomLevel = mapView.getZoomLevelDouble();
+        
+        TextView label = new TextView(requireContext());
+        label.setText("P");
+        
+        // Dynamically calculate text size based on zoom level, with a minimum size
+        // to ensure visibility at all zoom levels
+        float minSize = 12f; // Minimum size to ensure visibility
+        float maxSize = 24f; // Maximum size when fully zoomed in
+        float zoomFactor = (float) (zoomLevel - MIN_ZOOM) / (float) (MAX_ZOOM - MIN_ZOOM);
+        float textSize = minSize + (zoomFactor * (maxSize - minSize));
+        
+        label.setTextSize(textSize);
+        label.setTextColor(Color.BLUE);
+        label.setTypeface(null, Typeface.BOLD);
+        
+        
+        label.setPadding(6, 2, 6, 2);
+        
+        MapView.LayoutParams params = new MapView.LayoutParams(
+                MapView.LayoutParams.WRAP_CONTENT,
+                MapView.LayoutParams.WRAP_CONTENT,
+                center,
+                MapView.LayoutParams.CENTER,
+                0, 0);
+        
+        mapView.addView(label, params);
+    }
 
     private void drawPolygon(JSONArray coordinates, JSONObject properties) {
         try {
@@ -725,9 +826,9 @@ public class MapFragment extends Fragment {
             mapView.getOverlays().add(polygon);
 
             // Add a "P" label for parking areas
-            if (properties != null && "parking".equals(properties.optString("amenity", ""))) {
-                addParkingLabel(calculatePolygonCenter(geoPoints));
-            }
+            //if (properties != null && "parking".equals(properties.optString("amenity", ""))) {
+            //    addParkingLabel(calculatePolygonCenter(geoPoints));
+            //}
 
             polygon.setOnClickListener((polygon1, mapView, eventPos) -> {
                 // Consume tap events to prevent annoying speech bubble from
@@ -1344,5 +1445,52 @@ public class MapFragment extends Fragment {
     public void onPause() {
         super.onPause();
         mapView.onPause();
+    }
+
+    /**
+     * Adds a stairs icon at the specified point
+     */
+    private void addStairsIcon(GeoPoint center) {
+        if (center == null) return;
+        
+        try {
+            // Log the position for debugging
+            Log.d("MapFragment", "Adding stairs icon at: " + center.getLatitude() + ", " + center.getLongitude());
+            
+            // Create a marker for the stairs
+            Marker marker = new Marker(mapView);
+            marker.setPosition(center);
+            
+            // Check if the resource exists and log it
+            int resourceId = R.drawable.ic_stairs;
+            Drawable icon = null;
+            try {
+                icon = ContextCompat.getDrawable(requireContext(), resourceId);
+                Log.d("MapFragment", "Stairs icon resource found: " + (icon != null));
+            } catch (Exception e) {
+                Log.e("MapFragment", "Error loading stairs icon resource", e);
+                // Fallback to a default marker if the icon resource isn't found
+                icon = getResources().getDrawable(org.osmdroid.library.R.drawable.marker_default);
+            }
+            
+            
+            
+            // Set the icon
+            marker.setIcon(icon);
+            
+            // Set anchor to center of icon
+            marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER);
+            
+            // Make sure the marker is visible
+            marker.setVisible(true);
+            
+            // Add to map
+            mapView.getOverlays().add(marker);
+            
+            // Log successful addition
+            Log.d("MapFragment", "Stairs marker added to overlays");
+        } catch (Exception e) {
+            Log.e("MapFragment", "Error adding stairs icon", e);
+        }
     }
 }
