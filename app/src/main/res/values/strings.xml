@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">LlandaffCampusApp</string>
-    <string name="close_legend">Close legend</string>
+    <string name="close_legend">Close Legend</string>
     <string name="floor_1">Floor 1</string>
     <string name="floor_2">Floor 2</string>
     <string name="legend">Legend</string>
@@ -27,8 +27,7 @@
     <string name="events">Events</string>
     <string name="meetings">Meetings</string>
     <string name="book_an_induction">Book an Induction</string>
-    <string name="virtual_tours">Virtual Tours</string>"
-
+    <string name="virtual_tours">Virtual Tours</string>
 
     <string name="legend_info_desk">Information Desk</string>
     <string name="legend_library">Library</string>
@@ -45,19 +44,20 @@
     <string name="legend_parking">Parking</string>
     <string name="legend_lecture">Lecture Hall</string>
 
-    <string name="login_subtitle">Sign in to sync your preferences across devices</string>
+    <string name="login_subtitle">Sign In to Sync Your Preferences Across Devices</string>
     <string name="skip_login">Skip Login</string>
-    <string name="sign_in_with_google">Sign in with Google</string>
-    <string name="signing_in">Signing in…</string>
-    <string name="login_success">Login successful</string>
-    <string name="login_failed">Login failed. Please try again.</string>
-    <string name="logout">Log out</string>
+    <string name="sign_in_with_google">Sign In With Google</string>
+    <string name="signing_in">Signing In…</string>
+    <string name="login_success">Login Successful</string>
+    <string name="login_failed">Login Failed. Please Try Again.</string>
+    <string name="logout">Log Out</string>
     <string name="account_section_title">Account</string>
     <string name="guest_user">Guest User</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <!-- todo: remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello Blank Fragment</string>
     <string name="explore_gym">Explore Gym</string>
-    <string name="explore_lecturers">Explore lecturers</string>
+    <string name="explore_lecturers">Explore Lecturers</string>
+    <string name="explore_lecture_halls">Explore Lecture Halls</string>
     <string name="explore_cafeterias">Explore Cafeterias</string>
     <string name="explore_technology">Explore Technology</string>
     <string name="explore_location_blocks">Explore Location Blocks</string>
