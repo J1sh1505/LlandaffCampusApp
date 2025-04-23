@@ -4,8 +4,10 @@ androidxJunit = "1.1.4"
 appcompatVersion = "1.5.1"
 circleimageview = "3.1.0"
 constraintlayoutVersion = "2.1.4"
+core = "1.5.0"
 coreKtx = "1.15.0"
 espressoCoreVersion = "3.4.0"
+espressoIntents = "3.6.1"
 firebaseBom = "33.12.0"
 glide = "4.15.1"
 googleServices = "4.4.2"
@@ -17,17 +19,23 @@ material = "1.12.0"
 activity = "1.10.0"
 constraintlayout = "2.2.0"
 materialVersion = "1.7.0"
+mockitoAndroid = "4.5.1"
+mockitoCore = "4.5.1"
 navigationFragmentKtx = "2.8.9"
 navigationUiKtx = "2.8.9"
+orchestrator = "1.4.2"
 osmdroidAndroid = "6.1.15"
 playServicesAuth = "21.3.0"
+runner = "1.5.2"
 
 [libraries]
 appcompat-v151 = { module = "androidx.appcompat:appcompat", version.ref = "appcompatVersion" }
 circleimageview = { module = "de.hdodenhof:circleimageview", version.ref = "circleimageview" }
 constraintlayout-v214 = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayoutVersion" }
+core = { module = "androidx.test:core", version.ref = "core" }
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 espresso-core-v340 = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCoreVersion" }
+espresso-intents = { module = "androidx.test.espresso:espresso-intents", version.ref = "espressoIntents" }
 firebase-auth = { module = "com.google.firebase:firebase-auth" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 firebase-firestore = { module = "com.google.firebase:firebase-firestore" }
@@ -42,10 +50,15 @@ material = { group = "com.google.android.material", name = "material", version.r
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 material-v170 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
+mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
+mockito-mockito-android = { module = "org.mockito:mockito-android", version.ref = "mockitoAndroid" }
 navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationUiKtx" }
+orchestrator = { module = "androidx.test:orchestrator", version.ref = "orchestrator" }
 osmdroid-android = { module = "org.osmdroid:osmdroid-android", version.ref = "osmdroidAndroid" }
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
+rules = { module = "androidx.test:rules", version.ref = "core" }
+runner = { module = "androidx.test:runner", version.ref = "runner" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

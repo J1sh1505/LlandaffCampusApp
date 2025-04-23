@@ -506,7 +506,7 @@ public class MapFragment extends Fragment {
     }
     private String currentFloor = "0";  // Default to ground floor
 
-    private String getCurrentFloor() {
+    public String getCurrentFloor() {
         return currentFloor;
     }
 

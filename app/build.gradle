@@ -14,6 +14,10 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testOptions {
+            execution 'ANDROIDX_TEST_ORCHESTRATOR'
+            animationsDisabled true
+        }
     }
 
     buildTypes {
@@ -54,6 +58,13 @@ dependencies {
     testImplementation libs.junit
     androidTestImplementation libs.junit.v114
     androidTestImplementation libs.espresso.core.v340
+    androidTestImplementation libs.espresso.intents
+      androidTestImplementation libs.mockito.mockito.android
+    androidTestImplementation libs.mockito.core
+    androidTestImplementation libs.core
+    androidTestImplementation libs.runner
+    androidTestUtil libs.orchestrator
+
 
     // Open Street Map stuff
     implementation libs.osmdroid.android
@@ -61,7 +72,5 @@ dependencies {
     //pfp stuff
     implementation libs.circleimageview
     implementation libs.glide
-
-
 
 }
