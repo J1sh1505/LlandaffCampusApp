@@ -57,3 +57,8 @@ vcs.xml
 ehthumbs.db
 Thumbs.db
 /CLAUDE.md
+
+.classpath
+.project
+org.eclipse.buildship.core.prefs
+org.eclipse.jdt.core.prefs

@@ -345,6 +345,7 @@ public class MapFragment extends Fragment {
             System.out.println("Current zoom: " + currentZoom + ", showing rooms: " + showRooms);
             
             // Categorize all features for proper layering
+
             for (int i = 0; i < features.length(); i++) {
                 JSONObject feature = features.getJSONObject(i);
                 JSONObject geometry = feature.getJSONObject("geometry");
@@ -1045,7 +1046,7 @@ public class MapFragment extends Fragment {
     }
     private String currentFloor = "0";  // Default to ground floor
 
-    private String getCurrentFloor() {
+    public String getCurrentFloor() {
         return currentFloor;
     }
 

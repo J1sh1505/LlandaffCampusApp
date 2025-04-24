@@ -54,4 +54,12 @@
     <string name="sign_in">Mewngofnodi</string>
     <string name="llandaff_campus">Campws Llandaff</string>
     <string name="lecture_halls">Neuaddau Darlith</string>
+    <string name="explore_gym">Archwilio Campfeydd</string>
+    <string name="explore_lecturers">Archwilio Darlithwyr</string>
+    <string name="explore_lecture_halls">Archwilio Neuaddau Darlithio</string>
+    <string name="explore_cafeterias">Archwilio Ffreuturau</string>
+    <string name="explore_technology">Archwilio Technoleg</string>
+    <string name="explore_location_blocks">Archwilio Blociau Lleoliad</string>
+    <string name="explore_events">Archwilio Digwyddiadau</string>
+    <string name="explore_meetings">Archwilio Cyfarfodydd</string>
 </resources>

@@ -66,8 +66,8 @@
                     android:id="@+id/lecture_halls_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/explore_lecture_halls"
                     android:layout_marginTop="8dp"
-                    android:text="Explore Lecture Halls"
                     android:textColor="@android:color/white" />
             </LinearLayout>
 
@@ -100,7 +100,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Explore Cafeterias"
+                    android:text="@string/explore_cafeterias"
                     android:textColor="@android:color/white" />
             </LinearLayout>
 
@@ -133,7 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Explore lecturers"
+                    android:text="@string/explore_lecturers"
                     android:textColor="@android:color/white" />
             </LinearLayout>
 
@@ -166,7 +166,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Explore Gym"
+                    android:text="@string/explore_gym"
                     android:textColor="@android:color/white" />
             </LinearLayout>
 
@@ -199,7 +199,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Explore Technology"
+                    android:text="@string/explore_technology"
                     android:textColor="@android:color/white" />
             </LinearLayout>
 
@@ -232,7 +232,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Explore Location Blocks"
+                    android:text="@string/explore_location_blocks"
                     android:textColor="@android:color/white" />
             </LinearLayout>
 
@@ -265,7 +265,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Explore Events"
+                    android:text="@string/explore_events"
                     android:textColor="@android:color/white" />
             </LinearLayout>
 
@@ -298,7 +298,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Explore Meetings"
+                    android:text="@string/explore_meetings"
                     android:textColor="@android:color/white" />
             </LinearLayout>
 

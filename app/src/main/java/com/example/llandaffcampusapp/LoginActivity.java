@@ -194,7 +194,7 @@ public class LoginActivity extends BaseActivity {
                 .apply();
     }
 
-    private void checkAndSyncUserSettings(String userId) {
+    void checkAndSyncUserSettings(String userId) {
         DocumentReference userSettingsRef = mFirestore.collection(USERS_COLLECTION)
                 .document(userId)
                 .collection(SETTINGS_COLLECTION)
