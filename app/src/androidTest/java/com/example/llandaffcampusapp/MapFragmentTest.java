@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -37,13 +38,13 @@ public class MapFragmentTest {
         // Get activity and fragment
         activityRule.getScenario().onActivity(activity -> {
             // Find map fragment
-            MapFragment mapFragment = (MapFragment) activity.getSupportFragmentManager()
-                    .findFragmentById(R.id.nav_host_fragment)
+            MapFragment mapFragment = (MapFragment) Objects.requireNonNull(activity.getSupportFragmentManager()
+                            .findFragmentById(R.id.nav_host_fragment))
                     .getChildFragmentManager()
                     .getFragments().get(0);
 
             // Get map 
-            MapView mapView = mapFragment.getView().findViewById(R.id.mapView);
+            MapView mapView = Objects.requireNonNull(mapFragment.getView()).findViewById(R.id.mapView);
 
             // Check map centered over campus
             GeoPoint center = (GeoPoint) mapView.getMapCenter();
@@ -64,7 +65,7 @@ public class MapFragmentTest {
     }
 
     /**
-     * Test floor switching 
+     * Test floor switching using spinner
      */
     @Test
     public void testMapFloorSwitching() {
@@ -73,7 +74,8 @@ public class MapFragmentTest {
 
         // Check floor switching
         // Click first floor
-        onView(withId(R.id.btnFirstFloor)).perform(click());
+        onView(withId(R.id.floorSpinner)).perform(click());
+        onView(withText("1")).perform(click());
 
         // Check floor changed
         activityRule.getScenario().onActivity(activity -> {
@@ -85,8 +87,9 @@ public class MapFragmentTest {
             assertEquals("Floor should've changed to 1", "1", mapFragment.getCurrentFloor());
         });
 
-        // Click second floor button
-        onView(withId(R.id.btnSecondFloor)).perform(click());
+        // Click second floor
+        onView(withId(R.id.floorSpinner)).perform(click());
+        onView(withText("2")).perform(click());
 
         // check floor changed
         activityRule.getScenario().onActivity(activity -> {
@@ -99,7 +102,8 @@ public class MapFragmentTest {
         });
 
         // Go to ground floor
-        onView(withId(R.id.btnGroundFloor)).perform(click());
+        onView(withId(R.id.floorSpinner)).perform(click());
+        onView(withText("0")).perform(click());
 
         // Check floor was changed
         activityRule.getScenario().onActivity(activity -> {
