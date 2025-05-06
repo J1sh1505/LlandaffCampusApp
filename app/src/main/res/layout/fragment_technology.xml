@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="Technology"
+        android:text="@string/school_of_technology_title"
         android:textColor="@android:color/white"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -38,14 +38,158 @@
             android:layout_marginBottom="16dp"
             android:gravity="center">
 
-            <!-- Possible return button
-            <Button
-                android:id="@+id/return_button"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Return to Explore Page"
-                android:textColor="@android:color/white" /> -->
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:text="@string/about_the_school"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/about_the_school_text1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/about_the_school_text2"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
+
+                <ImageView
+                    android:id="@+id/lecture_halls_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/school_of_technology_title"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/maxresdefault" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/about_the_school_text3"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginRight="16dp"
+                android:gravity="center"
+                android:text="@string/about_the_school_text4"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginRight="16dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:text="@string/study_with_us"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:gravity="center"
+                android:text="@string/undergraduate_courses"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="20dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:autoLink="web"
+                android:textColorLink="#00FFFF"
+                android:text="@string/undergraduate_link"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:gravity="center"
+                android:text="@string/societies"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="20dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:autoLink="web"
+                android:textColorLink="#00FFFF"
+                android:text="@string/societies_link"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:gravity="center"
+                android:text="@string/student_coaches"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="20dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:autoLink="web"
+                android:textColorLink="#00FFFF"
+                android:text="@string/student_coaches_link"/>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

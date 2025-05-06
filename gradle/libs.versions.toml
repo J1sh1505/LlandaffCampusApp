@@ -27,6 +27,7 @@ orchestrator = "1.4.2"
 osmdroidAndroid = "6.1.15"
 playServicesAuth = "21.3.0"
 runner = "1.5.2"
+tableview = "2.8.0"
 
 [libraries]
 appcompat-v151 = { module = "androidx.appcompat:appcompat", version.ref = "appcompatVersion" }
@@ -59,6 +60,7 @@ osmdroid-android = { module = "org.osmdroid:osmdroid-android", version.ref = "os
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
 rules = { module = "androidx.test:rules", version.ref = "core" }
 runner = { module = "androidx.test:runner", version.ref = "runner" }
+tableview = { group = "de.codecrafters.tableview", name = "tableview", version.ref = "tableview" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

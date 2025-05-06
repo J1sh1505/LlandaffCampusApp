@@ -6,14 +6,14 @@
     android:layout_height="match_parent"
     android:background="#303030">
 
-    <!-- Title of the Book Induction Page -->
+    <!-- Title of the Undergraduate Open Days Page -->
     <TextView
         android:id="@+id/book_induction_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="Book Induction"
+        android:text="@string/undergraduate_day_Title"
         android:textColor="@android:color/white"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -38,14 +38,105 @@
             android:layout_marginBottom="16dp"
             android:gravity="center">
 
-            <!-- Possible return button
-            <Button
-                android:id="@+id/return_button"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Return to Explore Page"
-                android:textColor="@android:color/white" /> -->
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/book_induction_text1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/book_induction_text2"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
+
+                <ImageView
+                    android:id="@+id/lecture_halls_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/lecture_halls"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/campus_tours" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/undergraduate_day_date"/>
+
+            <Button
+                android:id="@+id/openWebsiteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/undergraduate_day_bookOpenDay"
+                android:backgroundTint="#2196F3"
+                android:textColor="#FFFFFF"
+                android:padding="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@string/undergraduate_studentLifeTitle"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/undergraduate_studentLifeText"/>
+
+            <Button
+                android:id="@+id/openBlogButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/student_life_button"
+                android:backgroundTint="#2196F3"
+                android:textColor="#FFFFFF"
+                android:padding="12dp" />
+
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

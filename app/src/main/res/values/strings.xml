@@ -26,7 +26,7 @@
     <string name="location_blocks">Location Blocks</string>
     <string name="events">Events</string>
     <string name="meetings">Meetings</string>
-    <string name="book_an_induction">Book an Induction</string>
+    <string name="undergraduate_openDay">Undergraduate Open Day</string>
     <string name="virtual_tours">Virtual Tours</string>
 
     <string name="legend_info_desk">Information Desk</string>
@@ -43,7 +43,6 @@
     <string name="legend_it">IT Support</string>
     <string name="legend_parking">Parking</string>
     <string name="legend_lecture">Lecture Hall</string>
-
     <string name="login_subtitle">Sign In to Sync Your Preferences Across Devices</string>
     <string name="skip_login">Skip Login</string>
     <string name="sign_in_with_google">Sign In With Google</string>
@@ -53,14 +52,72 @@
     <string name="logout">Log Out</string>
     <string name="account_section_title">Account</string>
     <string name="guest_user">Guest User</string>
+    <string name="lecture_halls_email1" translatable="false">•  Email: ejhasling@cardiffmet.ac.uk</string>
+    <string name="lecture_halls_email2" translatable="false">•  Email: ejhasling@cardiffmet.ac.uk</string>
+    <string name="lecture_halls_telephone2" translatable="false">•  Telephone: 02920 416181"</string>
+    <string name="lecture_halls_email3" translatable="false">•  Email: bchamberlain@cardiffmet.ac.uk</string>
+    <string name="lecture_halls_information2" translatable="false">For further information on the facilities and services available pleas email us on</string>
+    <string name="lecture_halls_email4" translatable="false">conferenceservices@cardiffmet.ac.uk</string>
+
     <!-- todo: remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello Blank Fragment</string>
     <string name="explore_gym">Explore Gym</string>
     <string name="explore_lecturers">Explore Lecturers</string>
     <string name="explore_lecture_halls">Explore Lecture Halls</string>
     <string name="explore_cafeterias">Explore Cafeterias</string>
-    <string name="explore_technology">Explore Technology</string>
-    <string name="explore_location_blocks">Explore Location Blocks</string>
+    <string name="explore_technology">Explore School of Technology</string>
+    <string name="explore_location_blocks">Explore Llandaff Campus</string>
     <string name="explore_events">Explore Events</string>
     <string name="explore_meetings">Explore Meetings</string>
+    <string name="undergraduate_link">https://www.cardiffmet.ac.uk/courses/</string>
+    <string name="school_of_technology_title">School of Technology</string>
+    <string name="about_the_school">About the School</string>
+    <string name="about_the_school_text1">Cardiff School of Technologies offers accredited, practically led degrees in Engineering, Computer Science, and Creative Technologies.</string>
+    <string name="about_the_school_text2">We work closely with employers across the tech industry to carefully design courses that are industry-relevant, and career focused, offering you opportunities to gain work experience, continue your research, or sstudy with our international partners.</string>
+    <string name="about_the_school_text3">Access industry-standard equipment and labs, exclusive student spaces, VR booths, gaming consoles and more.</string>
+    <string name="about_the_school_text4">With dedicated student coach mentors, the school fosters a supportive, close-knit community. At Cardiff School of Technologies, we know you by name, and when you study with us, you become part of our community.</string>
+    <string name="study_with_us">Studying with us</string>
+    <string name="undergraduate_courses">Undergraduate and Postgraduate Courses</string>
+    <string name="societies_link">https://www.cardiffmet.ac.uk/school-of-technologies/societies/</string>
+    <string name="societies">Societies</string>
+    <string name="student_coaches_link">https://www.cardiffmet.ac.uk/school-of-technologies/student-coaches/</string>
+    <string name="student_coaches">Student Coaches</string>
+    <string name="lecture_halls_text1">The University has a variety of lecture theatres and seminar rooms available for hire. Whether you\'re arranging a meeting for a small number of people or arranging a large conference we can accommodate your needs. All our rooms have full audio visual equipment built in and Wifi is available on site.</string>
+    <string name="lecture_halls_roomType">Room Type</string>
+    <string name="lecture_halls_capacity">Capacity</string>
+    <string name="lecture_halls_numOfRooms">Number of Rooms</string>
+    <string name="lecture_halls_text3">Conference And Marketing Coordinator</string>
+    <string name="lecture_halls_supportName3" translatable="false">Beccy Chamberlain</string>
+    <string name="lecture_halls_telephone" translatable="false">•  Telephone: 02920 416182</string>
+    <string name="lecture_halls_supportName2" translatable="false">Em Hasling</string>
+    <string name="lecture_halls_supportName1" translatable="false">Molly Lessimore</string>
+    <string name="lecture_halls_text2">For any further information or requests speak to one of our colleagues</string>
+    <string name="lecture_halls_roomName">Tiered Lecture Theatre</string>
+    <string name="book_induction_text1">Cardiff Met University offers Open Days for undergraduate students which is a perfect chance for you to find out more about the courses you\'re interested in.</string>
+    <string name="book_induction_text2">This will give you an opportunity to speak to some of the course tutors and students, tour of the facilities, accommodation and campus. This will also give you the opportunity to visit Cardiff and explore the beautiful city.</string>
+    <string name="book_induction_button">Book your place</string>
+    <string name="car_park_text">All visitors to Cardiff Met campuses are required to Pay and Display at the signed rate. In addition, visitors to the Llandaff Campus between 08.00am and 4.00pm must report to Reception to collect a temporary parking permit to be displayed alongside their Pay and Display ticket. Visitor Parking Spaces at Llandaff are severely limited and there is no guarantee of availability of a parking space. For large events, please discuss parking with the organisers in advance of your visit.</string>
+    <string name="llandaff_campus_text1">Llandaff campus is the home of the Cardiff School of Sports and Health Sciences, School of Management, Cardiff School of Technologies and the Cardiff School of Art and Design.</string>
+    <string name="llandaff_campus_mapButton">View Map of the Campus</string>
+    <string name="llandaff_campus_carPark">Car Park</string>
+    <string name="llandaff_campus_electricVehicle">Electrical Vehicle Charging</string>
+    <string name="llandaff_campus_ElecCarChargeText">We are pleased to confirm that 12 x EV chargers (22Kwh) are now available on this campus for staff, students and visitors (charges apply)</string>
+    <string name="llandaff_campus_howToReachUs">How to reach us</string>
+    <string name="llandaff_campus_bus">Bus</string>
+    <string name="llandaff_campus_busText1">• From Cardiff City Centre: 62, 63, 66 from Westgate Street, stopping at Western Avenue (3min walk)</string>
+    <string name="llandaff_campus_busText2">• From Cyncoed Campus: M1* stopping at Cardiff Met Llandaff Campus</string>
+    <string name="llandaff_campus_bus_timetableText">For timetables and full route details visit the Cardiff Bus website</string>
+    <string name="llandaff_campus_busWebsiteButton">Visit Cardiff Bus Website</string>
+    <string name="llandaff_campus_trainTitle">Train</string>
+    <string name="llandaff_campus_trainText">Waun-Gron railway station is approximately 20 minutes walk away from the Llandaff campus, and is on the City Line. See the National Rail Enquiries for train times.</string>
+    <string name="llandaff_campus_trainWebsiteButton">Visit National Rail</string>
+    <string name="llandaff_campus_bikeTitle">Bike</string>
+    <string name="llandaff_campus_bikeText1">Cardiff benefits from a network of cycle routes, including many traffic-free cycle paths. The Llandaff campus is situated right next to the Taff Trail, a popular national cycle route leading from the city centre as far north as Merthyr Tydfil.</string>
+    <string name="llandaff_campus_bikeText2">There is also a traffic-free bicycle path connecting the Llandaff campus with the Plas Gwyn residential campus, with only a short on-road section between Plas Gwyn and the cycle path entrance on Bridge Road. As this cycle path is currently not lit, we would advise you take an alternative route when travelling late at night.</string>
+    <string name="undergraduate_day_Title">Undergraduate Open Days</string>
+    <string name="undergraduate_day_date">Saturday 21 June 2025</string>
+    <string name="undergraduate_day_bookOpenDay">Book your Open Day place</string>
+    <string name="undergraduate_studentLifeTitle">Student Life at Cardiff Met</string>
+    <string name="undergraduate_studentLifeText">Deciding where to study isn\'t just about finding the right course. It’s about choosing where you’ll feel at home and the opportunities that will help you thrive and grow at university. Whether it’s the social life, extra-curricular activities or support to help you reach your potential, you’ll find it all at Cardiff Met. Find out more about life at Cardiff Met from students.</string>
+    <string name="student_life_button">Read our students blog</string>
 </resources>

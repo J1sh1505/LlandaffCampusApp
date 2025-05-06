@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#303030">
@@ -13,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="Lecture Halls"
+        android:text="@string/lecture_halls"
         android:textColor="@android:color/white"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -38,14 +39,531 @@
             android:layout_marginBottom="16dp"
             android:gravity="center">
 
-            <!-- Possible return button
-            <Button
-                android:id="@+id/return_button"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:text="@string/lecture_halls_text1"/>
+
+            <!--      TABLE         -->
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:shrinkColumns="*"
+                android:stretchColumns="*">
+
+                <!-- Row 1 with 3 columns -->
+                <TableRow
+                    android:id="@+id/tableRow1"
+                    android:layout_width="match_parent"
+                    android:layout_height="119dp"
+                    android:layout_marginTop="16dp">
+
+                    <TextView
+                        android:layout_width="99dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="20dip"
+                        android:text="@string/lecture_halls_roomType"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="159dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="20dip"
+                        android:text="@string/lecture_halls_capacity"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="20dip"
+                        android:text="@string/lecture_halls_numOfRooms"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white" />
+
+                </TableRow>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#CCCCCC" />
+
+                <!-- Row 2 with 3 columns -->
+                <TableRow
+                    android:id="@+id/tableRow2"
+                    android:layout_width="match_parent"
+                    android:layout_height="119dp"
+                    android:layout_marginTop="16dp">
+                    <TextView
+                        android:text="@string/lecture_halls_roomName"
+                        android:layout_weight="1"
+                        android:textColor="@android:color/white"
+                        android:padding="20dip"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="20dip"
+                        android:text="300 - 350"
+                        android:textColor="@android:color/white"
+                        tools:ignore="HardcodedText"/>
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="20dip"
+                        android:text="2"
+                        android:textColor="@android:color/white"
+                        tools:ignore="HardcodedText" />
+                </TableRow>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#CCCCCC" />
+
+                <!-- Row 3 with 3 columns -->
+                <TableRow
+                    android:id="@+id/tableRow3"
+                    android:layout_width="match_parent"
+                    android:layout_height="119dp"
+                    android:layout_marginTop="16dp">
+                    <TextView
+                        android:text="@string/lecture_halls_roomName"
+                        android:layout_weight="1"
+                        android:textColor="@android:color/white"
+                        android:padding="20dp"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="20dip"
+                        android:text="90-260"
+                        android:textColor="@android:color/white"
+                        tools:ignore="HardcodedText"/>
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="20dip"
+                        android:text="6"
+                        android:textColor="@android:color/white"
+                        tools:ignore="HardcodedText"/>
+                </TableRow>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#CCCCCC" />
+
+            <!-- Row 4 with 3 columns -->
+            <TableRow
+                android:id="@+id/tableRow4"
+                android:layout_width="match_parent"
+                android:layout_height="119dp"
+                android:layout_marginTop="16dp">
+                <TextView
+                    android:text="@string/lecture_halls_roomName"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/white"
+                    android:padding="20dip"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="20dip"
+                    android:text="49-80"
+                    android:textColor="@android:color/white"
+                    tools:ignore="HardcodedText"/>
+                <TextView
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="20dip"
+                    android:text="9"
+                    android:textColor="@android:color/white"
+                    tools:ignore="HardcodedText"/>
+            </TableRow>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CCCCCC" />
+
+                <!-- Row 5 with 3 columns -->
+                <TableRow
+                    android:id="@+id/tableRow5"
+                    android:layout_width="match_parent"
+                    android:layout_height="119dp"
+                    android:layout_marginTop="16dp">
+                    <TextView
+                        android:text="Seminar/Breakout Rooms"
+                        android:layout_weight="1"
+                        android:textColor="@android:color/white"
+                        android:padding="20dip"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="20dip"
+                        android:text="25-60"
+                        android:textColor="@android:color/white"
+                        tools:ignore="HardcodedText"/>
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="20dip"
+                        android:text="60"
+                        android:textColor="@android:color/white"
+                        tools:ignore="HardcodedText"/>
+                </TableRow>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#CCCCCC" />
+
+                <!-- Row 6 with 3 columns -->
+                <TableRow
+                    android:id="@+id/tableRow6"
+                    android:layout_width="match_parent"
+                    android:layout_height="119dp"
+                    android:layout_marginTop="16dp">
+                    <TextView
+                        android:text="Meeting Rooms"
+                        android:layout_weight="1"
+                        android:textColor="@android:color/white"
+                        android:padding="20dp"
+                        android:gravity="center"/>
+                    <TextView
+                        android:text="12-20"
+                        android:layout_weight="1"
+                        android:textColor="@android:color/white"
+                        android:padding="20dip"
+                        android:gravity="center"
+                        tools:ignore="HardcodedText"/>
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="20dip"
+                        android:text="5"
+                        android:textColor="@android:color/white"
+                        tools:ignore="HardcodedText"/>
+                </TableRow>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#CCCCCC" />
+
+                <!-- Row 7 with 3 columns -->
+                <TableRow
+                    android:id="@+id/tableRow7"
+                    android:layout_width="match_parent"
+                    android:layout_height="119dp"
+                    android:layout_marginTop="16dp">
+                    <TextView
+                        android:text="IT Training Rooms"
+                        android:layout_weight="1"
+                        android:textColor="@android:color/white"
+                        android:padding="20dip"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:text="20-30"
+                        android:layout_weight="1"
+                        android:textColor="@android:color/white"
+                        android:padding="20dip"
+                        android:gravity="center"
+                        tools:ignore="HardcodedText"/>
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="20dip"
+                        android:text="5"
+                        android:textColor="@android:color/white"
+                        tools:ignore="HardcodedText"/>
+                </TableRow>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#CCCCCC" />
+
+                <!-- Row 8 with 3 columns -->
+                <TableRow
+                    android:id="@+id/tableRow8"
+                    android:layout_width="match_parent"
+                    android:layout_height="119dp"
+                    android:layout_marginTop="16dp">
+                    <TextView
+                        android:text="Main Hall"
+                        android:layout_weight="1"
+                        android:textColor="@android:color/white"
+                        android:padding="20dip"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:text="225m2 / 350"
+                        android:layout_weight="1"
+                        android:textColor="@android:color/white"
+                        android:padding="20dip"
+                        android:gravity="center"
+                        tools:ignore="HardcodedText"/>
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="20dip"
+                        android:text="1"
+                        android:textColor="@android:color/white"
+                        tools:ignore="HardcodedText"/>
+                </TableRow>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#CCCCCC" />
+
+                <!-- Row 9 with 3 columns -->
+                <TableRow
+                    android:id="@+id/tableRow9"
+                    android:layout_width="match_parent"
+                    android:layout_height="119dp"
+                    android:layout_marginTop="16dp">
+                    <TextView
+                        android:text="NIAC Exhibition Space"
+                        android:layout_weight="1"
+                        android:textColor="@android:color/white"
+                        android:padding="20dip"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:text="225m2 / 350"
+                        android:layout_weight="1"
+                        android:textColor="@android:color/white"
+                        android:padding="20dip"
+                        android:gravity="center"
+                        tools:ignore="HardcodedText"/>
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="20dip"
+                        android:text="1"
+                        android:textColor="@android:color/white"
+                        tools:ignore="HardcodedText"/>
+                </TableRow>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#CCCCCC" />
+            </TableLayout>
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Return to Explore Page"
-                android:textColor="@android:color/white" /> -->
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/lecture_halls_text2">
+            </TextView>
+
+            <!-- Contact number one -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/lecture_halls_supportName1"
+                android:textStyle="bold">
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/lecture_halls_text3"
+                android:textStyle="bold">
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/lecture_halls_telephone">
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:textColorLink="#00FFFF"
+                android:autoLink="email"
+                android:text="@string/lecture_halls_email1">
+            </TextView>
+
+            <!-- Contact number two -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/lecture_halls_supportName2"
+                android:textStyle="bold">
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/lecture_halls_text3"
+                android:textStyle="bold">
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/lecture_halls_telephone">
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:textColorLink="#00FFFF"
+                android:autoLink="email"
+                android:text="@string/lecture_halls_email2">
+            </TextView>
+
+            <!-- Contact number three -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/lecture_halls_supportName3"
+                android:textStyle="bold">
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/lecture_halls_text3"
+                android:textStyle="bold">
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/lecture_halls_telephone2">
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:textColorLink="#00FFFF"
+                android:autoLink="email"
+                android:text="@string/lecture_halls_email3">
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/lecture_halls_information2">
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="20dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:autoLink="email"
+                android:textColorLink="#00FFFF"
+                android:text="@string/lecture_halls_email4">
+            </TextView>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

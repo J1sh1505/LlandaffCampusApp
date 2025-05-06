@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#303030">
@@ -13,13 +14,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="Location Blocks"
+        android:text="Llandaff Campus"
         android:textColor="@android:color/white"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
 
     <!-- Scrollable Area -->
     <ScrollView
@@ -38,14 +40,323 @@
             android:layout_marginBottom="16dp"
             android:gravity="center">
 
-            <!-- Possible return button
-            <Button
-                android:id="@+id/return_button"
+            <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Return to Explore Page"
-                android:textColor="@android:color/white" /> -->
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
+
+                <ImageView
+                    android:id="@+id/lecture_halls_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/lecture_halls"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/campus_image" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/llandaff_campus_text1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="Llandaff Campus"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="Cardiff Metropolitan University"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="Western Avenue"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="Cardiff"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="CF5 2YB"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="Telephone: 029 2041 6070"
+                tools:ignore="HardcodedText" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/map"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/campus_map" />
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/goToMapFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/llandaff_campus_mapButton"
+                android:backgroundTint="#2196F3"
+                android:textColor="#FFFFFF"
+                android:padding="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/llandaff_campus_carPark"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/car_park_text"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/llandaff_campus_electricVehicle"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/llandaff_campus_ElecCarChargeText"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/llandaff_campus_howToReachUs"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/llandaff_campus_bus"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/llandaff_campus_busText1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/llandaff_campus_busText2"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/llandaff_campus_bus_timetableText"/>
+
+            <Button
+                android:id="@+id/goToCardiffBusWebsite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/llandaff_campus_busWebsiteButton"
+                android:backgroundTint="#2196F3"
+                android:textColor="#FFFFFF"
+                android:padding="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/llandaff_campus_trainTitle"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/llandaff_campus_trainText"/>
+
+            <Button
+                android:id="@+id/goToNationalRail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/llandaff_campus_trainWebsiteButton"
+                android:backgroundTint="#2196F3"
+                android:textColor="#FFFFFF"
+                android:padding="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/llandaff_campus_bikeTitle"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/llandaff_campus_bikeText1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/llandaff_campus_bikeText2"/>
+
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
