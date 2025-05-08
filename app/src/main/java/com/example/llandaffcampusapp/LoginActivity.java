@@ -31,6 +31,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -102,22 +103,14 @@ public class LoginActivity extends BaseActivity {
         // Get shared preferences
         preferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         
-        // Configure Google Sign-In - without web client ID as a fallback
+        // Configure Google Sign-In directly from google-services.json
         GoogleSignInOptions.Builder gsoBuilder = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail();
         
-        try {
-            // Try to use the default_web_client_id from strings.xml if it exists
-            String webClientId = getString(R.string.default_web_client_id);
-            if (webClientId != null && !webClientId.isEmpty()) {
-                gsoBuilder.requestIdToken(webClientId);
-                Log.d(TAG, "Using web client ID from strings.xml: " + webClientId);
-            } else {
-                Log.w(TAG, "default_web_client_id is empty or not defined");
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "Error getting default_web_client_id", e);
-        }
+        // Use web client ID straight from google-services.json
+        String webClientId = "840241541650-9jf46mfm4lb39v5957so8aln7ujbefuv.apps.googleusercontent.com";
+        gsoBuilder.requestIdToken(webClientId);
+        Log.d(TAG, "Using web client ID directly: " + webClientId);
         
         GoogleSignInOptions gso = gsoBuilder.build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
@@ -196,55 +189,89 @@ public class LoginActivity extends BaseActivity {
     }
 
     void checkAndSyncUserSettings(String userId) {
-        DocumentReference userSettingsRef = mFirestore.collection(USERS_COLLECTION)
-                .document(userId)
-                .collection(SETTINGS_COLLECTION)
-                .document("user_preferences");
-
-        userSettingsRef.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                DocumentSnapshot document = task.getResult();
-                if (document.exists()) {
-                    // User has settings in Firestore, sync to local preferences
-                    String language = document.getString(PREF_LANGUAGE);
-                    String textSize = document.getString(PREF_TEXT_SIZE);
-
-                    if (language != null) {
-                        preferences.edit().putString(PREF_LANGUAGE, language).apply();
+        // Fallback in case of issues
+        try {
+            DocumentReference userSettingsRef = mFirestore.collection(USERS_COLLECTION)
+                    .document(userId)
+                    .collection(SETTINGS_COLLECTION)
+                    .document("user_preferences");
+            
+            // timeout to prevent UI blocking
+            userSettingsRef.get().addOnCompleteListener(task -> {
+                try {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document != null && document.exists()) {
+                            // has settings in Firestore, sync to local preferences
+                            String language = document.getString(PREF_LANGUAGE);
+                            String textSize = document.getString(PREF_TEXT_SIZE);
+    
+                            if (language != null) {
+                                preferences.edit().putString(PREF_LANGUAGE, language).apply();
+                            }
+    
+                            if (textSize != null) {
+                                preferences.edit().putString(PREF_TEXT_SIZE, textSize).apply();
+                            }
+                        } else {
+                            // No settings in Firestore, upload current prefs
+                            syncLocalSettingsToFirestore(userId);
+                        }
+                    } else {
+                        Log.w(TAG, "Error getting user settings", task.getException());
+                        Toast.makeText(LoginActivity.this, 
+                                "Couldn't sync settings, continuing with local settings", 
+                                Toast.LENGTH_SHORT).show();
                     }
-
-                    if (textSize != null) {
-                        preferences.edit().putString(PREF_TEXT_SIZE, textSize).apply();
-                    }
-                } else {
-                    // No settings in Firestore, upload current preferences
-                    syncLocalSettingsToFirestore(userId);
+                } catch (Exception e) {
+                    Log.e(TAG, "Error processing settings", e);
+                } finally {
+                    // Always go to main activity
+                    proceedToMainActivity();
                 }
-
-                // Proceed to main activity after syncing
+            }).addOnFailureListener(e -> {
+                Log.e(TAG, "Failed to get user settings", e);
                 proceedToMainActivity();
-            } else {
-                Log.w(TAG, "Error getting user settings", task.getException());
-                proceedToMainActivity(); // Proceed anyway to not block the user
-            }
-        });
+            });
+            
+            new android.os.Handler().postDelayed(() -> {
+                proceedToMainActivity();
+            }, 5000);
+            
+        } catch (Exception e) {
+            Log.e(TAG, "Critical error in checkAndSyncUserSettings", e);
+            proceedToMainActivity();
+        }
     }
     
     private void syncLocalSettingsToFirestore(String userId) {
-        String language = preferences.getString(PREF_LANGUAGE, "en");
-        String textSize = preferences.getString(PREF_TEXT_SIZE, "normal");
-        
-        Map<String, Object> userSettings = new HashMap<>();
-        userSettings.put(PREF_LANGUAGE, language);
-        userSettings.put(PREF_TEXT_SIZE, textSize);
-        
-        mFirestore.collection(USERS_COLLECTION)
-                .document(userId)
-                .collection(SETTINGS_COLLECTION)
-                .document("user_preferences")
-                .set(userSettings)
-                .addOnSuccessListener(aVoid -> Log.d(TAG, "User settings synced to Firestore"))
-                .addOnFailureListener(e -> Log.w(TAG, "Error syncing user settings", e));
+        try {
+            String language = preferences.getString(PREF_LANGUAGE, "en");
+            String textSize = preferences.getString(PREF_TEXT_SIZE, "normal");
+            
+            Map<String, Object> userSettings = new HashMap<>();
+            userSettings.put(PREF_LANGUAGE, language);
+            userSettings.put(PREF_TEXT_SIZE, textSize);
+            
+            // Ensure user doc exist
+            mFirestore.collection(USERS_COLLECTION)
+                    .document(userId)
+                    .set(new HashMap<>(), SetOptions.merge())
+                    .addOnSuccessListener(aVoid -> {
+                        // set settings doc
+                        mFirestore.collection(USERS_COLLECTION)
+                                .document(userId)
+                                .collection(SETTINGS_COLLECTION)
+                                .document("user_preferences")
+                                .set(userSettings)
+                                .addOnSuccessListener(innerVoid -> Log.d(TAG, "User settings synced to Firestore"))
+                                .addOnFailureListener(e -> Log.w(TAG, "Error syncing user settings", e));
+                    })
+                    .addOnFailureListener(e -> Log.w(TAG, "Error creating user document", e));
+        } catch (Exception e) {
+            Log.e(TAG, "Critical error in syncLocalSettingsToFirestore", e);
+            //log but no block
+        }
     }
     
     private void skipLogin() {

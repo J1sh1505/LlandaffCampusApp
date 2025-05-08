@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">LlandaffCampusApp1</string>
+    <string name="app_name">LlandaffCampusApp</string>
     <string name="close_legend">Cau\'r Allwedd</string>
     <string name="floor_1">Llawr 1</string>
     <string name="floor_2">Llawr 2</string>
     <string name="legend">Allwedd</string>
     <string name="ground_floor">Lllawr Gwaelod</string>
     <string name="language_title">Dewis Iaith</string>
-    <string name="english_option">"    "</string>
+    <string name="english_option">"    Saesneg"</string>
     <string name="welsh_option">Cymraeg</string>
     <string name="text_size_title">Dewis Maint Testun</string>
     <string name="text_size_normal">Normal</string>
