@@ -2,6 +2,7 @@ package com.example.llandaffcampusapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +34,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class LoginActivity extends BaseActivity {
     private static final String TAG = "LoginActivity";
@@ -129,10 +131,9 @@ public class LoginActivity extends BaseActivity {
             proceedToMainActivity();
         }
         
-        // Debug: Check if we have the SHA-1 cert fingerprint correct
         try {
-            Log.d(TAG, "Signing config: " + getPackageManager().getPackageInfo(getPackageName(), 
-                    android.content.pm.PackageManager.GET_SIGNATURES).signatures[0].toCharsString());
+            Log.d(TAG, "Signing config: " + Objects.requireNonNull(getPackageManager().getPackageInfo(getPackageName(),
+                    PackageManager.GET_SIGNATURES).signatures)[0].toCharsString());
         } catch (Exception e) {
             Log.e(TAG, "Error getting signature", e);
         }
