@@ -6,6 +6,7 @@ circleimageview = "3.1.0"
 constraintlayoutVersion = "2.1.4"
 core = "1.5.0"
 coreKtx = "1.15.0"
+coreKtxVersion = "1.12.0"
 espressoCoreVersion = "3.4.0"
 espressoIntents = "3.6.1"
 firebaseBom = "33.12.0"
@@ -26,6 +27,7 @@ navigationUiKtx = "2.8.9"
 orchestrator = "1.4.2"
 osmdroidAndroid = "6.1.15"
 playServicesAuth = "21.3.0"
+robolectric = "4.11.1"
 runner = "1.5.2"
 tableview = "2.8.0"
 
@@ -35,6 +37,7 @@ circleimageview = { module = "de.hdodenhof:circleimageview", version.ref = "circ
 constraintlayout-v214 = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayoutVersion" }
 core = { module = "androidx.test:core", version.ref = "core" }
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+core-ktx-v1120 = { module = "androidx.core:core-ktx", version.ref = "coreKtxVersion" }
 espresso-core-v340 = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCoreVersion" }
 espresso-intents = { module = "androidx.test.espresso:espresso-intents", version.ref = "espressoIntents" }
 firebase-auth = { module = "com.google.firebase:firebase-auth" }
@@ -58,6 +61,7 @@ navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.
 orchestrator = { module = "androidx.test:orchestrator", version.ref = "orchestrator" }
 osmdroid-android = { module = "org.osmdroid:osmdroid-android", version.ref = "osmdroidAndroid" }
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 rules = { module = "androidx.test:rules", version.ref = "core" }
 runner = { module = "androidx.test:runner", version.ref = "runner" }
 tableview = { group = "de.codecrafters.tableview", name = "tableview", version.ref = "tableview" }

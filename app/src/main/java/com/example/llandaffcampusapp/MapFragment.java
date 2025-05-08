@@ -844,7 +844,7 @@ public class MapFragment extends Fragment {
     /**
      * Calculates the center point of a polygon
      */
-    private GeoPoint calculatePolygonCenter(List<GeoPoint> points) {
+    public GeoPoint calculatePolygonCenter(List<GeoPoint> points) {
         if (points == null || points.isEmpty()) {
             return null;
         }
