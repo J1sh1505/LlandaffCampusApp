@@ -170,7 +170,7 @@
                     android:textColor="@android:color/white" />
             </LinearLayout>
 
-            <!-- School of Technology -->
+            <!-- Technology -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -269,7 +269,7 @@
                     android:textColor="@android:color/white" />
             </LinearLayout>
 
-            <!-- Meetings
+            <!-- Meetings -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -301,9 +301,8 @@
                     android:text="@string/explore_meetings"
                     android:textColor="@android:color/white" />
             </LinearLayout>
-             -->
 
-            <!-- Undergraduate Open Day -->
+            <!-- Book An Induction -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -322,7 +321,7 @@
                         android:id="@+id/book_induction_image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:contentDescription="@string/undergraduate_openDay"
+                        android:contentDescription="@string/book_an_induction"
                         android:scaleType="centerCrop"
                         android:src="@drawable/inductions" />
                 </androidx.cardview.widget.CardView>
@@ -332,7 +331,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@string/undergraduate_openDay"
+                    android:text="@string/book_an_induction"
                     android:textColor="@android:color/white" />
             </LinearLayout>
 

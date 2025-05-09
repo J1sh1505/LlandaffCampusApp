@@ -51,10 +51,10 @@ public class ExploreFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.action_exploreFragment_to_eventsFragment)
         );
 
-        /* Navigate to Meetings
+        // Navigate to Meetings
         view.findViewById(R.id.meetings_button).setOnClickListener(v ->
                 Navigation.findNavController(view).navigate(R.id.action_exploreFragment_to_meetingsFragment)
-        );*/
+        );
 
         // Navigate to Book an Induction
         view.findViewById(R.id.book_induction_button).setOnClickListener(v ->

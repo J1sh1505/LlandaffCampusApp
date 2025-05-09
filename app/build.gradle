@@ -55,9 +55,7 @@ dependencies {
     implementation libs.navigation.ui.ktx
 
     // Testing dependencies
-    implementation libs.core.ktx.v1120
     testImplementation libs.junit
-    testImplementation libs.robolectric
     androidTestImplementation libs.junit.v114
     androidTestImplementation libs.espresso.core.v340
     androidTestImplementation libs.espresso.intents
@@ -66,6 +64,7 @@ dependencies {
     androidTestImplementation libs.core
     androidTestImplementation libs.runner
     androidTestUtil libs.orchestrator
+
 
     // Open Street Map stuff
     implementation libs.osmdroid.android
