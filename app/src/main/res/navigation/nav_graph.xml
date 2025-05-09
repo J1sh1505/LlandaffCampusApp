@@ -59,13 +59,7 @@
     <fragment
         android:id="@+id/locationBlocksFragment"
         android:name="com.example.llandaffcampusapp.LocationBlocksFragment"
-        android:label="Location Blocks">
-
-    <action
-        android:id="@+id/action_locationBlock_to_map"
-        app:destination="@id/mapFragment" />
-    </fragment>
-
+        android:label="Location Blocks"/>
 
     <fragment
         android:id="@+id/technologyFragment"
