@@ -38,6 +38,14 @@
             android:layout_marginBottom="16dp"
             android:gravity="center">
 
+            <!-- Possible return button
+            <Button
+                android:id="@+id/return_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Return to Explore Page"
+                android:textColor="@android:color/white" /> -->
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
