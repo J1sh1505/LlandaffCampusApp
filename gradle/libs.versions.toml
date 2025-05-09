@@ -29,7 +29,6 @@ osmdroidAndroid = "6.1.15"
 playServicesAuth = "21.3.0"
 robolectric = "4.11.1"
 runner = "1.5.2"
-tableview = "2.8.0"
 
 [libraries]
 appcompat-v151 = { module = "androidx.appcompat:appcompat", version.ref = "appcompatVersion" }
@@ -64,7 +63,6 @@ play-services-auth = { module = "com.google.android.gms:play-services-auth", ver
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 rules = { module = "androidx.test:rules", version.ref = "core" }
 runner = { module = "androidx.test:runner", version.ref = "runner" }
-tableview = { group = "de.codecrafters.tableview", name = "tableview", version.ref = "tableview" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

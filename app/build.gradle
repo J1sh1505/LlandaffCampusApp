@@ -67,6 +67,7 @@ dependencies {
     androidTestImplementation libs.runner
     androidTestUtil libs.orchestrator
 
+
     // Open Street Map stuff
     implementation libs.osmdroid.android
 
